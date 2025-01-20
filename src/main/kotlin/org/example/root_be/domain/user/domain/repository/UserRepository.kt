@@ -1,4 +1,6 @@
 package org.example.root_be.domain.user.domain.repository
 
-class UserRepository {
-}
+import org.example.root_be.domain.user.domain.User
+import org.springframework.data.jpa.repository.JpaRepository
+
+interface UserRepository : JpaRepository<User, Long>
