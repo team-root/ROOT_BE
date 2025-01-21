@@ -1,7 +1,6 @@
 package org.example.root_be.global.config
 
-import org.example.root_be.global.security.auth.AuthDetailsService
-import org.example.root_be.global.security.jwt.JwtProperties
+import com.fasterxml.jackson.databind.ObjectMapper
 import org.example.root_be.global.security.jwt.JwtTokenProvider
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -16,9 +15,8 @@ import org.springframework.web.cors.CorsConfigurationSource
 @Configuration
 @EnableWebSecurity
 class SecurityConfig(
-    private val jwtProperties: JwtProperties,
-    private val jwtTokenProvider: JwtTokenProvider,
-    private val authDetailsService: AuthDetailsService
+    private val objectMapper: ObjectMapper,
+    private val jwtTokenProvider: JwtTokenProvider
 ) {
 
     @Bean
@@ -32,7 +30,7 @@ class SecurityConfig(
                 it.requestMatchers("/auth/**").permitAll()
                     .anyRequest().authenticated()
             }
-            .with(FilterConfig(jwtProperties, jwtTokenProvider, authDetailsService)) {}
+            .with(FilterConfig(objectMapper, jwtTokenProvider)) {}
 
         return http.build()
     }
