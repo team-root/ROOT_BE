@@ -2,8 +2,8 @@ package org.example.root_be.global.utils.openfeign
 
 import feign.Response
 import feign.codec.ErrorDecoder
-import org.example.root_be.global.utils.openfeign.exception.FeignBadRequestException
-import org.example.root_be.global.utils.openfeign.exception.FeignServerException
+import org.example.root_be.global.utils.openfeign.client.exception.FeignBadRequestException
+import org.example.root_be.global.utils.openfeign.client.exception.FeignServerException
 import org.springframework.stereotype.Component
 
 @Component
