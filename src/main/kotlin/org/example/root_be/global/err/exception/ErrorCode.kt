@@ -4,6 +4,7 @@ enum class ErrorCode(
     val message: String,
     val status: Int
 ) {
+    INVALID_ROLE("Invalid role.", 400),
     INVALID_TOKEN("Invalid Token", 401),
     EXPIRED_TOKEN("Expired Token", 401),
     USER_NOT_FOUND("User Not Found", 404),
