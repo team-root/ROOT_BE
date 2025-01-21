@@ -10,6 +10,9 @@ class User(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long,
 
+    @Column(name = "dsm_id", nullable = false)
+    var dsmId: String,
+
     @Column(nullable = false)
     var name: String,
 
