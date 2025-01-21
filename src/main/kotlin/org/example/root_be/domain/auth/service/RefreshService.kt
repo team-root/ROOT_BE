@@ -2,6 +2,7 @@ package org.example.root_be.domain.auth.service
 
 import org.example.root_be.domain.auth.domain.repository.RefreshTokenRepository
 import org.example.root_be.domain.auth.exception.RefreshTokenNotFoundException
+import org.example.root_be.domain.auth.presentation.dto.request.RefreshRequest
 import org.example.root_be.domain.auth.presentation.dto.response.RefreshResponse
 import org.example.root_be.global.security.jwt.JwtTokenProvider
 import org.springframework.stereotype.Service
@@ -13,12 +14,12 @@ class RefreshService(
     private val jwtTokenProvider: JwtTokenProvider
 ) {
     @Transactional
-    fun execute(refreshToken: String): RefreshResponse {
-        val token = refreshTokenRepository.findByToken(refreshToken)
+    fun execute(refreshRequest: RefreshRequest): RefreshResponse {
+        val refreshToken = refreshTokenRepository.findByToken(refreshRequest.refreshToken)
             ?: throw RefreshTokenNotFoundException()
 
         return RefreshResponse(
-            accessToken = jwtTokenProvider.generateAccessToken(token.userId)
+            accessToken = jwtTokenProvider.generateAccessToken(refreshToken.userId)
         )
     }
 }
