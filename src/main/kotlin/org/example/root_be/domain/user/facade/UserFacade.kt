@@ -12,4 +12,5 @@ class UserFacade(
     fun getUserById(id: Long): User =
         userRepository.findById(id)
             .orElseThrow { throw UserNotFoundException() }
+
 }
