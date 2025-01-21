@@ -1,4 +1,4 @@
-package org.example.root_be.global.utils.openfeign.client.dto.request
+package org.example.root_be.infrastructure.openfeign.client.dto.request
 
 data class UserInfoRequest(
     val accountId: String,
