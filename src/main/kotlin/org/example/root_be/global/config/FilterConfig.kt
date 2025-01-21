@@ -1,5 +1,7 @@
 package org.example.root_be.global.config
 
+import com.fasterxml.jackson.databind.ObjectMapper
+import org.example.root_be.global.err.GlobalExceptionFilter
 import org.example.root_be.global.security.auth.AuthDetailsService
 import org.example.root_be.global.security.jwt.JwtFilter
 import org.example.root_be.global.security.jwt.JwtProperties
@@ -12,13 +14,14 @@ import org.springframework.stereotype.Component
 
 @Component
 class FilterConfig(
+    private val objectMapper: ObjectMapper,
     private val jwtProperties: JwtProperties,
     private val jwtTokenProvider: JwtTokenProvider,
     private val authDetailsService: AuthDetailsService
 ) : SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity>() {
 
     override fun configure(builder: HttpSecurity) {
-        val filter = JwtFilter(jwtProperties, jwtTokenProvider, authDetailsService)
-        builder.addFilterBefore(filter, UsernamePasswordAuthenticationFilter::class.java)
+        builder.addFilterBefore(JwtFilter(jwtProperties, jwtTokenProvider, authDetailsService), UsernamePasswordAuthenticationFilter::class.java)
+        builder.addFilterBefore(GlobalExceptionFilter(objectMapper), JwtFilter::class.java)
     }
 }
