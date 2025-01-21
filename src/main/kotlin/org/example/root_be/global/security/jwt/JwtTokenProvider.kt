@@ -19,11 +19,16 @@
             jwtProperties.secret.toByteArray()
         )
 
+        companion object {
+            private const val ACCESS_KEY = "access_token"
+            private const val REFRESH_KEY = "refresh_token"
+        }
+
         fun generateAccessToken(id: Long): String =
-            generateToken(id, "access", jwtProperties.accessExpiration)
+            generateToken(id, ACCESS_KEY, jwtProperties.accessExpiration)
 
         fun generateRefreshToken(id: Long): String =
-            generateToken(id, "refresh", jwtProperties.refreshExpiration)
+            generateToken(id, REFRESH_KEY, jwtProperties.refreshExpiration)
 
         private fun generateToken(id: Long, type: String, expiration: Long): String =
             Jwts.builder()
@@ -49,12 +54,7 @@
             }
 
         fun authentication(token: String): UsernamePasswordAuthenticationToken? {
-            val userDetails = authDetailsService.loadUserByUsername(
-                extractId(token).toString()
-            )
+            val userDetails = authDetailsService.loadUserByUsername(getTokenBody(token).subject)
             return UsernamePasswordAuthenticationToken(userDetails, "", userDetails.authorities)
         }
-
-        fun extractId(token: String): Long =
-            getTokenBody(token).subject.toLong()
     }
