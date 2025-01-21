@@ -2,6 +2,7 @@ package org.example.root_be.domain.auth.service
 
 import org.example.root_be.domain.auth.domain.RefreshToken
 import org.example.root_be.domain.auth.domain.repository.RefreshTokenRepository
+import org.example.root_be.domain.auth.exception.InvalidRoleException
 import org.example.root_be.domain.auth.presentation.dto.request.LoginRequest
 import org.example.root_be.domain.auth.presentation.dto.response.LoginResponse
 import org.example.root_be.domain.user.domain.User
@@ -31,6 +32,12 @@ class LoginService(
             )
         )
 
+        val role = when(userInfo.userRole) {
+            "SCH" -> Role.ADMIN
+            "STU" -> Role.STUDENT
+            else -> throw InvalidRoleException()
+        }
+
         val user = userRepository.findByDsmId(userInfo.accountId)
             ?.apply {
                 name = userInfo.name
@@ -44,7 +51,7 @@ class LoginService(
                 num = userInfo.num,
                 grade = userInfo.grade,
                 classNum = userInfo.classNum,
-                userRole = Role.valueOf(userInfo.userRole),
+                userRole = role,
                 totalVolunteerTime = 0
             )
         )
