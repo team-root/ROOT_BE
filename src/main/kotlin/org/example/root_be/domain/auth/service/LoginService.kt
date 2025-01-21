@@ -10,8 +10,8 @@ import org.example.root_be.domain.user.domain.repository.UserRepository
 import org.example.root_be.domain.user.domain.type.Role
 import org.example.root_be.global.security.jwt.JwtProperties
 import org.example.root_be.global.security.jwt.JwtTokenProvider
-import org.example.root_be.global.utils.openfeign.client.DsmAuthClient
-import org.example.root_be.global.utils.openfeign.client.dto.request.UserInfoRequest
+import org.example.root_be.infrastructure.openfeign.client.DsmAuthClient
+import org.example.root_be.infrastructure.openfeign.client.dto.request.UserInfoRequest
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 

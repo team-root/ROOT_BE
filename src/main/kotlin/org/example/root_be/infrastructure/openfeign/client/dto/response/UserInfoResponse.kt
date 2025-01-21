@@ -1,4 +1,4 @@
-package org.example.root_be.global.utils.openfeign.client.dto.response
+package org.example.root_be.infrastructure.openfeign.client.dto.response
 
 data class UserInfoResponse(
    val id: String,

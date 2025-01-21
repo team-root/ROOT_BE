@@ -1,4 +1,4 @@
-package org.example.root_be.global.utils.openfeign
+package org.example.root_be.infrastructure.openfeign
 
 import feign.Logger
 import org.springframework.context.annotation.Bean
