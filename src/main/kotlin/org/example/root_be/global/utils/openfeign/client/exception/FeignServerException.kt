@@ -1,6 +1,6 @@
 package org.example.root_be.global.utils.openfeign.exception
 
-import org.example.root_be.global.error.exception.CustomException
-import org.example.root_be.global.error.exception.ErrorCode
+import org.example.root_be.global.err.exception.CustomException
+import org.example.root_be.global.err.exception.ErrorCode
 
 class FeignServerException : CustomException(ErrorCode.FEIGN_SERVER_ERROR)
