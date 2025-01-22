@@ -8,6 +8,7 @@ import java.time.LocalDateTime
 class VolunteerPost(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "post_id")
     val id: Long,
 
     @Column(name = "title", nullable = false)
