@@ -28,4 +28,4 @@ jwt:
 
 dsm:
   auth:
-    url: ${DSM_AUTH_URL:https://prod-server.xquare.app/dsm-login}
+    url: ${DSM_AUTH_URL:https://prod-server.xquare.app/dsm-login/user}
