@@ -9,12 +9,6 @@ import org.springframework.stereotype.Component
 @Component
 class FeignClientErrorDecoder : ErrorDecoder {
    override fun decode(methodKey: String, response: Response): Exception {
-       //왜?
-       println(response.status())
-       println(response.body())
-       println(response.request())
-       println(response.headers())
-       //
        return when (response.status()) {
            in 400..499 -> FeignBadRequestException()
            in 500..599 -> FeignServerException()
