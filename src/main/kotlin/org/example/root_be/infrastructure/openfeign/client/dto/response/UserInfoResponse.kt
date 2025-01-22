@@ -17,5 +17,5 @@ data class UserInfoResponse(
    @JsonProperty("birth_day")
    val birthDay: String,
    val profileImgUrl: String,
-   val clubName: String
+   val clubName: String?
 )
