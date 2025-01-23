@@ -9,7 +9,7 @@ class VolunteerPost(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "post_id")
-    val id: Long,
+    val id: Long = 0,
 
     @Column(name = "title", nullable = false)
     var title: String,
