@@ -1,7 +1,6 @@
 package org.example.root_be.domain.volunteer.presentation.dto.request
 
 import jakarta.validation.constraints.NotBlank
-import org.example.root_be.domain.role.domain.Role
 import org.hibernate.validator.constraints.Length
 import org.jetbrains.annotations.NotNull
 
@@ -34,5 +33,5 @@ data class GenerateVolunteerPostRequest(
     val personnel: String,
 
     @field:NotNull
-    val role: List<Role>
+    val role: List<RoleElement>
 )
