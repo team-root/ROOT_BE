@@ -1,6 +1,7 @@
 package org.example.root_be.domain.volunteer.service
 
 import jakarta.transaction.Transactional
+import org.example.root_be.domain.role.domain.Role
 import org.example.root_be.domain.role.domain.repository.RoleRepository
 import org.example.root_be.domain.volunteer.domain.VolunteerPost
 import org.example.root_be.domain.volunteer.domain.repository.VolunteerPostRepository
@@ -38,7 +39,22 @@ class GenerateVolunteerPostService(
                 )
             }
 
-        request.role.map { role -> roleRepository.save(role) }
         volunteerPostRepository.save(volunteerPost)
+        saveRoles(request, volunteerPost)
+    }
+
+    @Transactional
+    fun saveRoles(
+        request: GenerateVolunteerPostRequest,
+        volunteerPost: VolunteerPost
+    ) {
+        val roleList = request.role.map { role ->
+            Role(
+                id = role.roleId,
+                title = role.title,
+                volunteerPost = volunteerPost
+            )
+        }
+        roleList.map { roleRepository.save(it) }
     }
 }
