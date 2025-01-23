@@ -3,6 +3,7 @@ package org.example.root_be.domain.volunteer.presentation
 import org.example.root_be.domain.volunteer.presentation.dto.request.GenerateVolunteerPostRequest
 import org.example.root_be.domain.volunteer.service.GenerateVolunteerPostService
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
@@ -13,7 +14,7 @@ class VolunteerController(
 ) {
     @PostMapping
     fun generateVolunteerPost(
-        request: GenerateVolunteerPostRequest
+        @RequestBody request: GenerateVolunteerPostRequest
     ) {
         generateVolunteerPostService.execute(request)
     }
