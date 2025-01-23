@@ -19,7 +19,6 @@ class SecurityConfig(
     private val objectMapper: ObjectMapper,
     private val jwtTokenProvider: JwtTokenProvider
 ) {
-
     @Bean
     fun filterChain(http: HttpSecurity, corsConfigurationSource: CorsConfigurationSource): SecurityFilterChain {
         http
@@ -31,49 +30,48 @@ class SecurityConfig(
                 it
                     .requestMatchers("/auth/**").permitAll()
 
-                    //student
-                    .requestMatchers(
-                        HttpMethod.GET,
-                        "/user/mypage",
-                        "/user/volunteer-verification"
+                    // Both ADMIN and STUDENT endpoints
+                    .requestMatchers(HttpMethod.GET,
+                        "/users/me",
+                        "/posts",
+                        "/posts/{postId}",
+                        "/schedules",
+                        "/schedules/{date}",
+                        "/notifications"
+                    ).hasAnyRole("ADMIN", "STUDENT")
+
+                    // STUDENT only endpoints
+                    .requestMatchers(HttpMethod.GET,
+                        "/users/me/volunteer"
                     ).hasRole("STUDENT")
                     .requestMatchers(HttpMethod.POST,
-                        "/user/volunteer-application",
-                        "/user/qrcode-scan"
+                        "/volunteer/applications",
+                        "/qr/scan"
                     ).hasRole("STUDENT")
 
-                    //admin
+                    // ADMIN only endpoints
                     .requestMatchers(HttpMethod.GET,
-                        "/admin/qrcode-creation",
-                        "/admin/mypage",
-                        "/admin/inquiry/**",
-                        "/admin/volunteer-application/**"
+                        "/users",
+                        "/users/volunteer/hours",
+                        "/volunteer/applications/{postId}"
                     ).hasRole("ADMIN")
                     .requestMatchers(HttpMethod.POST,
-                        "/admin/volunteer-hours/grants",
-                        "/admin/role-assignment/**",
-                        "/admin/volunteer-application/request",
-                        "/admin/volunteer-posts/creation",
-                        "/admin/schedules",
+                        "/users/volunteer/hours",
+                        "/posts",
+                        "/volunteer/applications/status",
+                        "/volunteer/roles/{postId}",
+                        "/schedules",
+                        "/qr",
                         "/notifications"
                     ).hasRole("ADMIN")
                     .requestMatchers(HttpMethod.PATCH,
-                        "/admin/volunteer-posts/**",
-                        "/admin/schedules/**"
+                        "/posts/{postId}",
+                        "/schedules/{date}"
                     ).hasRole("ADMIN")
                     .requestMatchers(HttpMethod.DELETE,
-                        "/admin/volunteer-posts/**",
-                        "/admin/schedules/**"
+                        "/posts/{postId}",
+                        "/schedules/{date}"
                     ).hasRole("ADMIN")
-
-                    //student, admin
-                    .requestMatchers(HttpMethod.GET,
-                        "/schedules/inquiry",
-                        "/schedules/**",
-                        "/volunteer-posts",
-                        "/volunteer-posts/**",
-                        "/notifications"
-                    ).hasAnyRole("STUDENT", "ADMIN")
 
                     .anyRequest().authenticated()
             }
