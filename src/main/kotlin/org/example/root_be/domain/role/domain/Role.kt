@@ -15,5 +15,5 @@ class Role(
     val volunteerPost: VolunteerPost,
 
     @Column(name = "title")
-    val title: String,
+    var title: String,
 )
