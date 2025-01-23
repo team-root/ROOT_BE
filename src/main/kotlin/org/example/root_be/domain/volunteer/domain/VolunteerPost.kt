@@ -29,8 +29,8 @@ class VolunteerPost(
     @Column(name = "work_end_date")
     var workEndDate: LocalDateTime?,
 
-    @Column(name = "work_date")
-    var workDate: String?,
+    @Column(name = "day_of_week")
+    var dayOfWeek: String?,
 
     @Column(name = "is_regular", nullable = false)
     var isRegular: Boolean,
