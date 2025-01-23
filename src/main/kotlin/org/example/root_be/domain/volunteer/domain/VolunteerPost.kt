@@ -1,6 +1,7 @@
 package org.example.root_be.domain.volunteer.domain
 
 import jakarta.persistence.*
+import java.time.LocalDate
 import java.time.LocalDateTime
 
 @Entity
@@ -18,16 +19,16 @@ class VolunteerPost(
     var activityDetails: String?,
 
     @Column(name = "application_start_date", nullable = false)
-    var applicationStartDate: LocalDateTime,
+    var applicationStartDate: LocalDate,
 
     @Column(name = "application_end_date", nullable = false)
-    var applicationEndDate: LocalDateTime,
+    var applicationEndDate: LocalDate,
 
     @Column(name = "work_start_date")
-    var workStartDate: LocalDateTime?,
+    var workStartDate: LocalDate?,
 
     @Column(name = "work_end_date")
-    var workEndDate: LocalDateTime?,
+    var workEndDate: LocalDate?,
 
     @Column(name = "day_of_week")
     var dayOfWeek: String?,
