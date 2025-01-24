@@ -50,7 +50,7 @@ class GenerateVolunteerPostService(
     ) {
         val roleList = request.role.map { role ->
             Role(
-                id = role.roleId,
+                id = role.id,
                 title = role.title,
                 volunteerPost = volunteerPost
             )

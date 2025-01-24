@@ -1,6 +1,6 @@
 package org.example.root_be.domain.volunteer.presentation.dto.request
 
 data class RoleElement(
-    val roleId: Long,
+    val id: Long,
     val title: String
 )
