@@ -30,7 +30,7 @@ class SecurityConfig(
                 it
                     .requestMatchers("/auth/**").permitAll()
 
-                    // Both ADMIN and STUDENT endpoints
+                    // ADMIN, STUDENT 공통 엔드포인트
                     .requestMatchers(HttpMethod.GET,
                         "/users/me",
                         "/posts",
@@ -40,25 +40,25 @@ class SecurityConfig(
                         "/notifications"
                     ).hasAnyRole("ADMIN", "STUDENT")
 
-                    // STUDENT only endpoints
+                    // STUDENT 전용 엔드포인트
                     .requestMatchers(HttpMethod.GET,
                         "/users/me/volunteer"
                     ).hasRole("STUDENT")
                     .requestMatchers(HttpMethod.POST,
-                        "/volunteer/applications",
+                        "/volunteer/applications/{postId}",
                         "/qr/scan"
                     ).hasRole("STUDENT")
 
-                    // ADMIN only endpoints
+                    // ADMIN 전용 엔드포인트
                     .requestMatchers(HttpMethod.GET,
                         "/users",
-                        "/users/volunteer/hours",
+                        "/users/{userId}/volunteer",
                         "/volunteer/applications/{postId}"
                     ).hasRole("ADMIN")
                     .requestMatchers(HttpMethod.POST,
-                        "/users/volunteer/hours",
+                        "/users/volunteer",
                         "/posts",
-                        "/volunteer/applications/status",
+                        "/volunteer/applications/{postId}/status",
                         "/volunteer/roles/{postId}",
                         "/schedules",
                         "/qr",
