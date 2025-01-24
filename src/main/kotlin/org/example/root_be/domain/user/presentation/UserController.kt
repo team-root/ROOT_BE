@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/users")
 class UserController (
     private val mypageService: MypageService
 ){
-    @GetMapping("/mypage")
+    @GetMapping("/me")
     fun mypage(): MypageResponse = mypageService.execute()
 }
