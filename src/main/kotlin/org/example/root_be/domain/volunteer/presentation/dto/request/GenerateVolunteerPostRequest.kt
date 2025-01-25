@@ -1,8 +1,10 @@
 package org.example.root_be.domain.volunteer.presentation.dto.request
 
+import com.fasterxml.jackson.annotation.JsonFormat
 import jakarta.validation.constraints.NotBlank
 import org.hibernate.validator.constraints.Length
 import org.jetbrains.annotations.NotNull
+import java.time.LocalDate
 
 data class GenerateVolunteerPostRequest(
     @field:NotNull
@@ -34,4 +36,23 @@ data class GenerateVolunteerPostRequest(
 
     @field:NotNull
     val role: List<RoleElement>
-)
+) {
+    data class ApplicationPeriodElement(
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+        val startDate: LocalDate,
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+        val endDate: LocalDate
+    )
+
+    data class WorkDateElement(
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+        val startDate: LocalDate,
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+        val endDate: LocalDate
+    )
+
+    data class RoleElement(
+        val id: Long,
+        val title: String
+    )
+}
