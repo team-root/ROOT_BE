@@ -52,6 +52,6 @@ class VolunteerPost(
     @Column(name = "updated_at")
     var updatedAt: LocalDateTime = LocalDateTime.now(),
 
-    @OneToMany(mappedBy = "volunteer_post")
+    @OneToMany(mappedBy = "volunteerPost")
     val roles: List<Role> = listOf()
 )
