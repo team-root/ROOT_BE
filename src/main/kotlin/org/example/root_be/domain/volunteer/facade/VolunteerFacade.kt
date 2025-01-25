@@ -12,7 +12,7 @@ class VolunteerFacade(
     fun getVolunteerPostById(
         postId: Long
     ): VolunteerPost {
-        return volunteerPostRepository.getVolunteerPostById(postId)
-            ?: throw VolunteerPostNotFoundException
+        return volunteerPostRepository.findById(postId)
+            .orElseThrow() { VolunteerPostNotFoundException }
     }
 }
