@@ -5,7 +5,7 @@ import org.example.root_be.domain.post.domain.VolunteerPost
 
 @Entity
 @Table(name = "ROLE")
-class Role(
+class VolunteerRole(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long,
