@@ -1,8 +1,8 @@
-package org.example.root_be.domain.volunteer.service
+package org.example.root_be.domain.post.service
 
 import jakarta.transaction.Transactional
-import org.example.root_be.domain.volunteer.facade.VolunteerFacade
-import org.example.root_be.domain.volunteer.presentation.dto.response.GetVolunteerPostResponse
+import org.example.root_be.domain.post.facade.VolunteerFacade
+import org.example.root_be.domain.post.presentation.dto.response.GetVolunteerPostResponse
 import org.springframework.stereotype.Service
 
 @Service

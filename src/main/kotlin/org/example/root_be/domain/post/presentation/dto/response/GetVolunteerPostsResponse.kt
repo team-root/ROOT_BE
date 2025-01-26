@@ -1,6 +1,6 @@
-package org.example.root_be.domain.volunteer.presentation.dto.response
+package org.example.root_be.domain.post.presentation.dto.response
 
-import org.example.root_be.domain.volunteer.domain.VolunteerPost
+import org.example.root_be.domain.post.domain.VolunteerPost
 
 data class GetVolunteerPostsResponse(
     val content: List<VolunteerPostsElement>

@@ -1,4 +1,4 @@
-package org.example.root_be.domain.volunteer.exception
+package org.example.root_be.domain.post.exception
 
 import org.example.root_be.global.err.exception.CustomException
 import org.example.root_be.global.err.exception.ErrorCode
