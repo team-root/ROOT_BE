@@ -1,7 +1,7 @@
-package org.example.root_be.domain.volunteer.service
+package org.example.root_be.domain.post.service
 
-import org.example.root_be.domain.volunteer.domain.repository.VolunteerPostRepository
-import org.example.root_be.domain.volunteer.presentation.dto.response.GetVolunteerPostsResponse
+import org.example.root_be.domain.post.domain.repository.VolunteerPostRepository
+import org.example.root_be.domain.post.presentation.dto.response.GetVolunteerPostsResponse
 import org.springframework.stereotype.Service
 
 @Service

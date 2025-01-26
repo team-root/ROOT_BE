@@ -1,11 +1,11 @@
-package org.example.root_be.domain.volunteer.service
+package org.example.root_be.domain.post.service
 
 import jakarta.transaction.Transactional
 import org.example.root_be.domain.role.domain.Role
 import org.example.root_be.domain.role.domain.repository.RoleRepository
-import org.example.root_be.domain.volunteer.domain.VolunteerPost
-import org.example.root_be.domain.volunteer.domain.repository.VolunteerPostRepository
-import org.example.root_be.domain.volunteer.presentation.dto.request.GenerateVolunteerPostRequest
+import org.example.root_be.domain.post.domain.VolunteerPost
+import org.example.root_be.domain.post.domain.repository.VolunteerPostRepository
+import org.example.root_be.domain.post.presentation.dto.request.GenerateVolunteerPostRequest
 import org.springframework.stereotype.Service
 import java.time.LocalDateTime
 

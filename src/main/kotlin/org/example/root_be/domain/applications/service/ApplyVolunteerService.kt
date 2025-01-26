@@ -5,7 +5,7 @@ import org.example.root_be.domain.applications.domain.VolunteerApplication
 import org.example.root_be.domain.applications.domain.repository.VolunteerApplicationRepository
 import org.example.root_be.domain.applications.presentation.dto.response.ApplyVolunteerResponse
 import org.example.root_be.domain.user.facade.UserFacade
-import org.example.root_be.domain.volunteer.facade.VolunteerFacade
+import org.example.root_be.domain.post.facade.VolunteerFacade
 import org.springframework.stereotype.Service
 
 @Service

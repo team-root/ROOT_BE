@@ -1,4 +1,4 @@
-package org.example.root_be.domain.volunteer.domain
+package org.example.root_be.domain.post.domain
 
 import jakarta.persistence.*
 import org.example.root_be.domain.role.domain.Role
