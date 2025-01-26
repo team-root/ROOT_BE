@@ -1,7 +1,7 @@
 package org.example.root_be.domain.post.service
 
 import jakarta.transaction.Transactional
-import org.example.root_be.domain.role.domain.Role
+import org.example.root_be.domain.role.domain.VolunteerRole
 import org.example.root_be.domain.role.domain.repository.RoleRepository
 import org.example.root_be.domain.post.domain.VolunteerPost
 import org.example.root_be.domain.post.domain.repository.VolunteerPostRepository
@@ -49,7 +49,7 @@ class GenerateVolunteerPostService(
         volunteerPost: VolunteerPost
     ) {
         val roleList = request.role.map { role ->
-            Role(
+            VolunteerRole(
                 id = role.id,
                 title = role.title,
                 volunteerPost = volunteerPost
