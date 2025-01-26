@@ -1,8 +1,9 @@
 package org.example.root_be.domain.activity.domain
 
 import jakarta.persistence.*
+import org.example.root_be.domain.detail.domain.VolunteerDetail
 import org.example.root_be.domain.user.domain.User
-import org.example.root_be.domain.post.domain.VolunteerPost
+
 import java.time.LocalDateTime
 
 @Entity
@@ -17,11 +18,11 @@ class VolunteerActivity(
     val user: User,
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "post_id", nullable = false)
-    val volunteerPost: VolunteerPost,
+    @JoinColumn(name = "detail_id", nullable = false)
+    val volunteerDetail: VolunteerDetail,
 
     @Column(nullable = false)
-    val activityDate: LocalDateTime,
+    val activityDate: LocalDateTime = LocalDateTime.now(),
 
     @Column(nullable = false)
     val createdAt: LocalDateTime = LocalDateTime.now()

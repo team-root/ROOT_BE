@@ -31,4 +31,8 @@ class User(
 
     @Column(name = "total_volunteer_time", nullable = false)
     var totalVolunteerTime: Int
-)
+){
+    fun addVolunteerTime(time: Int) {
+        this.totalVolunteerTime += time
+    }
+}
