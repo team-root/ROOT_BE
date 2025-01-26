@@ -58,7 +58,7 @@ class SecurityConfig(
                     .requestMatchers(HttpMethod.POST,
                         "/users/volunteer",
                         "/posts",
-                        "/volunteer/applications/{postId}/status",
+                        "/volunteer/applications/status",
                         "/volunteer/roles/{postId}",
                         "/schedules",
                         "/qr",

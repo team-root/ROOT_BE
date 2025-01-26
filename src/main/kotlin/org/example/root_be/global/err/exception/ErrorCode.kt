@@ -11,5 +11,6 @@ enum class ErrorCode(
     USER_NOT_FOUND("User Not Found", 404),
     INVALID_PASSWORD("Invalid Password", 401),
     FEIGN_BAD_REQUEST("External API request is invalid.", 400),
-    FEIGN_SERVER_ERROR("An external server error occurred.", 500)
+    FEIGN_SERVER_ERROR("An external server error occurred.", 500),
+    APPLICATION_NOT_FOUND("Application Not Found", 404),
 }
