@@ -5,4 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface VolunteerApplicationRepository : JpaRepository<VolunteerApplication, Long>
+interface VolunteerApplicationRepository : JpaRepository<VolunteerApplication, Long> {
+    fun findAllByVolunteerPostId(postId: Long): List<VolunteerApplication>
+}
