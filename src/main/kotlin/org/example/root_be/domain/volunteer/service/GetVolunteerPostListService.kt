@@ -5,7 +5,7 @@ import org.example.root_be.domain.volunteer.presentation.dto.response.GetVolunte
 import org.springframework.stereotype.Service
 
 @Service
-class GetVolunteerPostsService(
+class GetVolunteerPostListService(
     private val volunteerPostRepository: VolunteerPostRepository
 ) {
     fun execute(): GetVolunteerPostsResponse {

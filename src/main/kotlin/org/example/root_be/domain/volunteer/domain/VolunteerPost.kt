@@ -1,6 +1,7 @@
 package org.example.root_be.domain.volunteer.domain
 
 import jakarta.persistence.*
+import org.example.root_be.domain.role.domain.Role
 import java.time.LocalDate
 import java.time.LocalDateTime
 
@@ -49,5 +50,8 @@ class VolunteerPost(
     val createAt: LocalDateTime = LocalDateTime.now(),
 
     @Column(name = "updated_at")
-    var updatedAt: LocalDateTime = LocalDateTime.now()
+    var updatedAt: LocalDateTime = LocalDateTime.now(),
+
+    @OneToMany(mappedBy = "volunteerPost")
+    val roles: List<Role> = listOf()
 )
