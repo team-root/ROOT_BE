@@ -16,10 +16,4 @@ class VolunteerRole(
 
     @Column(name = "title")
     var title: String,
-) {
-    fun modifyRole(
-        title: String
-    ) {
-        this.title = title
-    }
-}
+)
