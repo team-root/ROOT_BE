@@ -1,4 +1,4 @@
-package org.example.root_be.domain.volunteer.presentation.dto.request
+package org.example.root_be.domain.post.presentation.dto.request
 
 import com.fasterxml.jackson.annotation.JsonFormat
 import jakarta.validation.constraints.NotBlank

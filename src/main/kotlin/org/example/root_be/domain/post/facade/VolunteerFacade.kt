@@ -1,8 +1,8 @@
-package org.example.root_be.domain.volunteer.facade
+package org.example.root_be.domain.post.facade
 
-import org.example.root_be.domain.volunteer.domain.VolunteerPost
-import org.example.root_be.domain.volunteer.domain.repository.VolunteerPostRepository
-import org.example.root_be.domain.volunteer.exception.VolunteerPostNotFoundException
+import org.example.root_be.domain.post.domain.VolunteerPost
+import org.example.root_be.domain.post.domain.repository.VolunteerPostRepository
+import org.example.root_be.domain.post.exception.VolunteerPostNotFoundException
 import org.springframework.stereotype.Component
 
 @Component

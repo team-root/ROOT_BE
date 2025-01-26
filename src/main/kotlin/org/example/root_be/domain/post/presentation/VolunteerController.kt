@@ -1,11 +1,11 @@
-package org.example.root_be.domain.volunteer.presentation
+package org.example.root_be.domain.post.presentation
 
-import org.example.root_be.domain.volunteer.presentation.dto.request.GenerateVolunteerPostRequest
-import org.example.root_be.domain.volunteer.presentation.dto.response.GetVolunteerPostResponse
-import org.example.root_be.domain.volunteer.presentation.dto.response.GetVolunteerPostsResponse
-import org.example.root_be.domain.volunteer.service.GenerateVolunteerPostService
-import org.example.root_be.domain.volunteer.service.GetVolunteerPostDetailsService
-import org.example.root_be.domain.volunteer.service.GetVolunteerPostListService
+import org.example.root_be.domain.post.presentation.dto.request.GenerateVolunteerPostRequest
+import org.example.root_be.domain.post.presentation.dto.response.GetVolunteerPostResponse
+import org.example.root_be.domain.post.presentation.dto.response.GetVolunteerPostsResponse
+import org.example.root_be.domain.post.service.GenerateVolunteerPostService
+import org.example.root_be.domain.post.service.GetVolunteerPostDetailsService
+import org.example.root_be.domain.post.service.GetVolunteerPostListService
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
