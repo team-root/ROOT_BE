@@ -5,5 +5,5 @@ import org.example.root_be.domain.role.domain.VolunteerRole
 import org.springframework.data.jpa.repository.JpaRepository
 
 interface RoleRepository: JpaRepository<VolunteerRole, Long> {
-    fun findAllByVolunteerPostId(postId: Long): List<VolunteerRole>
+    fun deleteAllByVolunteerPost(post: VolunteerPost)
 }
