@@ -1,6 +1,7 @@
 package org.example.root_be.domain.post.domain
 
 import jakarta.persistence.*
+import org.example.root_be.domain.post.presentation.dto.request.ModifyVolunteerPostRequest
 import org.example.root_be.domain.role.domain.VolunteerRole
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -54,4 +55,32 @@ class VolunteerPost(
 
     @OneToMany(mappedBy = "volunteerPost")
     val roles: List<VolunteerRole> = listOf()
-)
+) {
+    fun modifyPost(
+        isRegular: Boolean,
+        title: String,
+        activityDetails: String?,
+        applicationStartDate: LocalDate,
+        applicationEndDate: LocalDate,
+        workStartDate: LocalDate?,
+        workEndDate: LocalDate?,
+        dayOfWeek: String?,
+        place: String,
+        time: String,
+        personnel: String,
+        updatedAt: LocalDateTime
+    ) {
+        this.isRegular = isRegular
+        this.title = title
+        this.activityDetails = activityDetails
+        this.applicationStartDate = applicationStartDate
+        this.applicationEndDate = applicationEndDate
+        this.workStartDate = workStartDate
+        this.workEndDate = workEndDate
+        this.dayOfWeek = dayOfWeek
+        this.place = place
+        this.time = time
+        this.personnel = personnel
+        this.updatedAt = LocalDateTime.now()
+    }
+}
