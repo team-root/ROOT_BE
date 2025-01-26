@@ -3,19 +3,23 @@ package org.example.root_be.domain.user.presentation
 import org.example.root_be.domain.user.presentation.dto.response.MyVolunteerActivityResponse
 import org.example.root_be.domain.user.presentation.dto.response.MypageResponse
 import org.example.root_be.domain.user.presentation.dto.response.StudentQueryResponse
+import org.example.root_be.domain.user.presentation.dto.response.StudentVolunteerActivityResponse
 import org.example.root_be.domain.user.service.MyVolunteerActivityService
 import org.example.root_be.domain.user.service.MypageService
 import org.example.root_be.domain.user.service.StudentQueryService
+import org.example.root_be.domain.user.service.StudentVolunteerActivityService
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/users")
-class UserController (
+class UserController(
     private val mypageService: MypageService,
     private val myVolunteerActivityService: MyVolunteerActivityService,
-    private val studentQueryService: StudentQueryService
+    private val studentQueryService: StudentQueryService,
+    private val studentVolunteerActivityService: StudentVolunteerActivityService
 ){
     @GetMapping("/me")
     fun mypage(): MypageResponse = mypageService.execute()
@@ -25,4 +29,9 @@ class UserController (
 
     @GetMapping
     fun studentQuery(): StudentQueryResponse = studentQueryService.execute()
+
+    @GetMapping("/{userId}/volunteer")
+    fun studentVolunteerActivity(
+        @PathVariable userId: Long
+    ): StudentVolunteerActivityResponse = studentVolunteerActivityService.execute(userId)
 }
