@@ -2,7 +2,7 @@ package org.example.root_be.domain.activity.domain
 
 import jakarta.persistence.*
 import org.example.root_be.domain.user.domain.User
-import org.example.root_be.domain.volunteer.domain.VolunteerPost
+import org.example.root_be.domain.post.domain.VolunteerPost
 import java.time.LocalDateTime
 
 @Entity

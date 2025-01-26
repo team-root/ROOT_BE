@@ -1,7 +1,7 @@
-package org.example.root_be.domain.volunteer.presentation.dto.response
+package org.example.root_be.domain.post.presentation.dto.response
 
 import com.fasterxml.jackson.annotation.JsonFormat
-import org.example.root_be.domain.volunteer.domain.VolunteerPost
+import org.example.root_be.domain.post.domain.VolunteerPost
 import java.time.LocalDate
 
 data class GetVolunteerPostResponse(
