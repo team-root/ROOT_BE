@@ -18,8 +18,8 @@ class MyVolunteerActivityService(
         val volunteerList = volunteerActivityRepository.findAllByUserId(user.id)
             .map { activity ->
                 VolunteerElement(
-                    volunteerTime = activity.volunteerPost.time,
-                    volunteerAct = activity.volunteerPost.activityDetails
+                    volunteerTime = activity.volunteerDetail.time,
+                    volunteerAct = activity.volunteerDetail.activityDetails
                 )
             }
 
