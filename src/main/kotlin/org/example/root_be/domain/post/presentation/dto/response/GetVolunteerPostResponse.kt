@@ -1,6 +1,7 @@
 package org.example.root_be.domain.post.presentation.dto.response
 
 import com.fasterxml.jackson.annotation.JsonFormat
+import org.example.root_be.domain.detail.domain.VolunteerDetail
 import org.example.root_be.domain.post.domain.VolunteerPost
 import java.time.LocalDate
 
@@ -16,15 +17,18 @@ data class GetVolunteerPostResponse(
     val personnel: String,
     val role: List<RoleResponse>
 ) {
-    constructor(volunteerPost: VolunteerPost): this(
+    constructor(
+        volunteerPost: VolunteerPost,
+        volunteerDetail: VolunteerDetail
+    ): this(
         id = volunteerPost.id,
         title = volunteerPost.title,
-        activityDetails = volunteerPost.activityDetails,
+        activityDetails = volunteerDetail.activityDetails,
         applicationPeriod = listOf(ApplicationPeriodResponse(volunteerPost)),
         workDate = listOf(WorkDateResponse(volunteerPost)),
         dayOfWeek = volunteerPost.dayOfWeek,
-        place = volunteerPost.place,
-        time = volunteerPost.time,
+        place = volunteerDetail.place,
+        time = volunteerDetail.time,
         personnel = volunteerPost.personnel,
         role = volunteerPost.roles.map { RoleResponse(it.id, it.title) }
     )
