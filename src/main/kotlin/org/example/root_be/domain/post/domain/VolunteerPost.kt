@@ -1,7 +1,7 @@
 package org.example.root_be.domain.post.domain
 
 import jakarta.persistence.*
-import org.example.root_be.domain.post.presentation.dto.request.ModifyVolunteerPostRequest
+import org.example.root_be.domain.detail.domain.VolunteerDetail
 import org.example.root_be.domain.role.domain.VolunteerRole
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -17,8 +17,9 @@ class VolunteerPost(
     @Column(name = "title", nullable = false)
     var title: String,
 
-    @Column(name = "activity_details")
-    var activityDetails: String?,
+    @OneToOne
+    @JoinColumn(name = "detail_id")
+    var volunteerDetail: VolunteerDetail,
 
     @Column(name = "application_start_date", nullable = false)
     var applicationStartDate: LocalDate,
@@ -48,7 +49,7 @@ class VolunteerPost(
     var personnel: String,
 
     @Column(name = "created_at", nullable = false)
-    val createAt: LocalDateTime = LocalDateTime.now(),
+    val createdAt: LocalDateTime = LocalDateTime.now(),
 
     @Column(name = "updated_at")
     var updatedAt: LocalDateTime = LocalDateTime.now(),
@@ -59,7 +60,7 @@ class VolunteerPost(
     fun modifyPost(
         isRegular: Boolean,
         title: String,
-        activityDetails: String?,
+        volunteerDetail: VolunteerDetail,
         applicationStartDate: LocalDate,
         applicationEndDate: LocalDate,
         workStartDate: LocalDate?,
@@ -72,7 +73,7 @@ class VolunteerPost(
     ) {
         this.isRegular = isRegular
         this.title = title
-        this.activityDetails = activityDetails
+        this.volunteerDetail = volunteerDetail
         this.applicationStartDate = applicationStartDate
         this.applicationEndDate = applicationEndDate
         this.workStartDate = workStartDate
