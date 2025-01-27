@@ -39,12 +39,6 @@ class VolunteerPost(
     @Column(name = "is_regular", nullable = false)
     var isRegular: Boolean,
 
-    @Column(name = "place", nullable = false)
-    var place: String,
-
-    @Column(name = "time", nullable = false)
-    var time: String,
-
     @Column(name = "personnel", nullable = false)
     var personnel: String,
 
@@ -66,8 +60,6 @@ class VolunteerPost(
         workStartDate: LocalDate?,
         workEndDate: LocalDate?,
         dayOfWeek: String?,
-        place: String,
-        time: String,
         personnel: String,
         updatedAt: LocalDateTime
     ) {
@@ -79,8 +71,6 @@ class VolunteerPost(
         this.workStartDate = workStartDate
         this.workEndDate = workEndDate
         this.dayOfWeek = dayOfWeek
-        this.place = place
-        this.time = time
         this.personnel = personnel
         this.updatedAt = LocalDateTime.now()
     }
