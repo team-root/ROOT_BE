@@ -52,7 +52,7 @@ data class ModifyVolunteerPostRequest(
     )
 
     data class RoleElement(
-        val id: Long,
+        val roleId: Long?,
         val title: String
     )
 }
