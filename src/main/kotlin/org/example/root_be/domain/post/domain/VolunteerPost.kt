@@ -54,7 +54,6 @@ class VolunteerPost(
     fun modifyPost(
         isRegular: Boolean,
         title: String,
-        volunteerDetail: VolunteerDetail,
         applicationStartDate: LocalDate,
         applicationEndDate: LocalDate,
         workStartDate: LocalDate?,
@@ -65,7 +64,6 @@ class VolunteerPost(
     ) {
         this.isRegular = isRegular
         this.title = title
-        this.volunteerDetail = volunteerDetail
         this.applicationStartDate = applicationStartDate
         this.applicationEndDate = applicationEndDate
         this.workStartDate = workStartDate
