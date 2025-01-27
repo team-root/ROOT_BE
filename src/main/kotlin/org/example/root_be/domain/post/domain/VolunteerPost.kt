@@ -19,7 +19,7 @@ class VolunteerPost(
 
     @OneToOne
     @JoinColumn(name = "detail_id")
-    var volunteerDetail: VolunteerDetail,
+    var volunteerDetail: VolunteerDetail? = null,
 
     @Column(name = "application_start_date", nullable = false)
     var applicationStartDate: LocalDate,
