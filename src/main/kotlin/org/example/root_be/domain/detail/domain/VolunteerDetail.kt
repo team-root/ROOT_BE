@@ -12,13 +12,13 @@ class VolunteerDetail(
     val id: Long = 0,
 
     @Column(nullable = false)
-    val activityDetails: String,
+    var activityDetails: String,
 
     @Column(nullable = false)
-    val place: String,
+    var place: String,
 
     @Column(nullable = false)
-    val time: String,
+    var time: String,
 
     @OneToOne(mappedBy = "volunteerDetail")
     val volunteerPost: VolunteerPost? = null,
