@@ -6,4 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository
 
 interface RoleRepository: JpaRepository<VolunteerRole, Long> {
     fun deleteAllByVolunteerPost(post: VolunteerPost)
+    fun findAllByVolunteerPost(post: VolunteerPost): List<VolunteerRole>
 }
