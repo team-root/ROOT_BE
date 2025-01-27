@@ -1,6 +1,8 @@
 package org.example.root_be.domain.post.service
 
 import jakarta.transaction.Transactional
+import org.example.root_be.domain.detail.domain.repository.VolunteerDetailRepository
+import org.example.root_be.domain.detail.facade.DetailFacade
 import org.example.root_be.domain.post.domain.VolunteerPost
 import org.example.root_be.domain.post.domain.repository.VolunteerPostRepository
 import org.example.root_be.domain.post.facade.VolunteerFacade
@@ -16,6 +18,8 @@ class ModifyVolunteerPostService(
     private val volunteerPostRepository: VolunteerPostRepository,
     private val volunteerFacade: VolunteerFacade,
     private val roleRepository: RoleRepository,
+    private val detailFacade: DetailFacade,
+    private val volunteerDetailRepository: VolunteerDetailRepository
 ) {
     @Transactional
     fun execute(
@@ -30,20 +34,34 @@ class ModifyVolunteerPostService(
         post.modifyPost(
             isRegular = request.isRegular,
             title = request.title,
-            activityDetails = request.activityDetails,
             applicationStartDate = applicationDate.startDate,
             applicationEndDate = applicationDate.endDate,
             workStartDate = workDate?.startDate,
             workEndDate = workDate?.endDate,
             dayOfWeek = request.dayOfWeek,
-            place = request.place,
-            time = request.time,
             personnel = request.personnel,
             updatedAt = LocalDateTime.now()
         )
 
+        saveDetail(request, post)
         saveRoles(request, post)
         volunteerPostRepository.save(post)
+    }
+
+    @Transactional
+    fun saveDetail(
+        request: ModifyVolunteerPostRequest,
+        post: VolunteerPost
+    ) {
+        val detail = detailFacade.getVolunteerDetailsByPostId(post.id)
+        request.run {
+            detail.modifyDetail(
+                activityDetails = activityDetails,
+                place = place,
+                time = time
+            )
+        }
+        volunteerDetailRepository.save(detail)
     }
 
     @Transactional
