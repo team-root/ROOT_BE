@@ -8,7 +8,7 @@ import org.example.root_be.domain.post.domain.VolunteerPost
 class VolunteerRole(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long,
+    val id: Long = 0L,
 
     @ManyToOne
     @JoinColumn(name = "post_id")
