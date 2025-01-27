@@ -7,6 +7,7 @@ import org.example.root_be.domain.post.facade.VolunteerFacade
 import org.example.root_be.domain.post.presentation.dto.request.ModifyVolunteerPostRequest
 import org.example.root_be.domain.role.domain.VolunteerRole
 import org.example.root_be.domain.role.domain.repository.RoleRepository
+import org.example.root_be.domain.role.exception.VolunteerRoleNotFoundException
 import org.springframework.stereotype.Service
 import java.time.LocalDateTime
 
@@ -40,6 +41,7 @@ class ModifyVolunteerPostService(
             personnel = request.personnel,
             updatedAt = LocalDateTime.now()
         )
+
         saveRoles(request, post)
         volunteerPostRepository.save(post)
     }
@@ -49,15 +51,34 @@ class ModifyVolunteerPostService(
         request: ModifyVolunteerPostRequest,
         post: VolunteerPost
     ) {
-        roleRepository.deleteAllByVolunteerPost(post)
+        val requestedRoleIds = request.role
+            .mapNotNull { it.roleId }
+            .toSet()
 
-        val roles = request.role.map { role ->
-            VolunteerRole(
-                id = role.id,
-                title = role.title,
-                volunteerPost = post
-            )
+        val existingRoles = roleRepository.findAllByVolunteerPost(post)
+
+        val rolesToDelete = existingRoles.filter { it.id !in requestedRoleIds }
+        roleRepository.deleteAll(rolesToDelete)
+
+        val newRoles = mutableListOf<VolunteerRole>()
+
+        request.role.forEach { roleRequest ->
+            when (val id = roleRequest.roleId) {
+                null -> newRoles.add(
+                    VolunteerRole(
+                        id = 0,
+                        title = roleRequest.title,
+                        volunteerPost = post
+                    )
+                )
+                else -> existingRoles.find { it.id == id }
+                    ?.apply { title = roleRequest.title }
+                    ?: throw VolunteerRoleNotFoundException
+            }
         }
-        roles.forEach { roleRepository.save(it) }
+
+        if (newRoles.isNotEmpty()) {
+            roleRepository.saveAll(newRoles)
+        }
     }
 }
