@@ -1,6 +1,8 @@
 package org.example.root_be.domain.post.service
 
 import jakarta.transaction.Transactional
+import org.example.root_be.domain.detail.domain.VolunteerDetail
+import org.example.root_be.domain.detail.domain.repository.VolunteerDetailRepository
 import org.example.root_be.domain.role.domain.VolunteerRole
 import org.example.root_be.domain.role.domain.repository.RoleRepository
 import org.example.root_be.domain.post.domain.VolunteerPost
@@ -12,7 +14,8 @@ import java.time.LocalDateTime
 @Service
 class GenerateVolunteerPostService(
     private val volunteerPostRepository: VolunteerPostRepository,
-    private val roleRepository: RoleRepository
+    private val roleRepository: RoleRepository,
+    private val volunteerDetailRepository: VolunteerDetailRepository
 ) {
     @Transactional
     fun execute(
@@ -21,24 +24,32 @@ class GenerateVolunteerPostService(
         val applicationDate = request.applicationPeriod.first()
         val workDate = request.workDate?.firstOrNull()
 
+        val detail =
+            request.run {
+                VolunteerDetail(
+                    activityDetails = activityDetails,
+                    place = place,
+                    time = time
+                )
+            }
+
         val volunteerPost =
             request.run {
                 VolunteerPost(
                     isRegular = isRegular,
                     title = title,
-                    activityDetails = activityDetails,
+                    volunteerDetail = detail,
                     applicationStartDate = applicationDate.startDate,
                     applicationEndDate = applicationDate.endDate,
                     workStartDate = workDate?.startDate,
                     workEndDate = workDate?.endDate,
                     dayOfWeek = dayOfWeek,
-                    place = place,
-                    time = time,
                     personnel = personnel,
-                    createAt = LocalDateTime.now(),
+                    createdAt = LocalDateTime.now(),
                 )
             }
 
+        volunteerDetailRepository.save(detail)
         volunteerPostRepository.save(volunteerPost)
         saveRoles(request, volunteerPost)
     }
