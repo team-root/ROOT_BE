@@ -25,4 +25,14 @@ class VolunteerDetail(
 
     @OneToMany(mappedBy = "volunteerDetail")
     val volunteerActivities: List<VolunteerActivity> = mutableListOf()
-)
+) {
+    fun modifyDetail(
+        activityDetails: String,
+        place: String,
+        time: String
+    ) {
+        this.activityDetails = activityDetails
+        this.place = place
+        this.time = time
+    }
+}
