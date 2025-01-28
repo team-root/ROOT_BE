@@ -4,10 +4,8 @@ import org.example.root_be.domain.post.presentation.dto.request.GenerateVoluntee
 import org.example.root_be.domain.post.presentation.dto.request.ModifyVolunteerPostRequest
 import org.example.root_be.domain.post.presentation.dto.response.GetVolunteerPostResponse
 import org.example.root_be.domain.post.presentation.dto.response.GetVolunteerPostsResponse
-import org.example.root_be.domain.post.service.GenerateVolunteerPostService
-import org.example.root_be.domain.post.service.GetVolunteerPostDetailsService
-import org.example.root_be.domain.post.service.GetVolunteerPostListService
-import org.example.root_be.domain.post.service.ModifyVolunteerPostService
+import org.example.root_be.domain.post.service.*
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -22,7 +20,8 @@ class VolunteerController(
     private val generateVolunteerPostService: GenerateVolunteerPostService,
     private val getVolunteerPostsService: GetVolunteerPostListService,
     private val getVolunteerPostService: GetVolunteerPostDetailsService,
-    private val modifyVolunteerPostService: ModifyVolunteerPostService
+    private val modifyVolunteerPostService: ModifyVolunteerPostService,
+    private val deleteVolunteerPostService: DeleteVolunteerPostService
 ) {
     @PostMapping
     fun generateVolunteerPost(
@@ -47,5 +46,12 @@ class VolunteerController(
         @RequestBody request: ModifyVolunteerPostRequest
     ) {
         modifyVolunteerPostService.execute(postId, request)
+    }
+
+    @DeleteMapping("/{postId}")
+    fun deleteVolunteerPost(
+        @PathVariable postId: Long
+    ) {
+        deleteVolunteerPostService.execute(postId)
     }
 }
