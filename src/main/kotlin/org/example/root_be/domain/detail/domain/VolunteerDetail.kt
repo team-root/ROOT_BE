@@ -12,17 +12,27 @@ class VolunteerDetail(
     val id: Long = 0,
 
     @Column(nullable = false)
-    val activityDetails: String,
+    var activityDetails: String,
 
     @Column(nullable = false)
-    val place: String,
+    var place: String,
 
     @Column(nullable = false)
-    val time: String,
+    var time: String,
 
     @OneToOne(mappedBy = "volunteerDetail")
     val volunteerPost: VolunteerPost? = null,
 
     @OneToMany(mappedBy = "volunteerDetail")
     val volunteerActivities: List<VolunteerActivity> = mutableListOf()
-)
+) {
+    fun modifyDetail(
+        activityDetails: String,
+        place: String,
+        time: String
+    ) {
+        this.activityDetails = activityDetails
+        this.place = place
+        this.time = time
+    }
+}
