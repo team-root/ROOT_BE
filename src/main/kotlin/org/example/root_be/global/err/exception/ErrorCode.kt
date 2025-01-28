@@ -9,6 +9,7 @@ enum class ErrorCode(
     EXPIRED_TOKEN("Expired Token", 401),
     VOLUNTEER_POST_NOT_FOUND("Post Not Found", 404),
     VOLUNTEER_ROLE_NOT_FOUND("Role Not Found", 404),
+    VOLUNTEER_DETAIL_NOT_FOUND("Detail Not Found", 404),
     USER_NOT_FOUND("User Not Found", 404),
     INVALID_PASSWORD("Invalid Password", 401),
     FEIGN_BAD_REQUEST("External API request is invalid.", 400),

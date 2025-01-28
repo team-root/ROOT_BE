@@ -1,7 +1,7 @@
 package org.example.root_be.domain.post.domain
 
 import jakarta.persistence.*
-import org.example.root_be.domain.post.presentation.dto.request.ModifyVolunteerPostRequest
+import org.example.root_be.domain.detail.domain.VolunteerDetail
 import org.example.root_be.domain.role.domain.VolunteerRole
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -17,8 +17,9 @@ class VolunteerPost(
     @Column(name = "title", nullable = false)
     var title: String,
 
-    @Column(name = "activity_details")
-    var activityDetails: String?,
+    @OneToOne
+    @JoinColumn(name = "detail_id")
+    var volunteerDetail: VolunteerDetail? = null,
 
     @Column(name = "application_start_date", nullable = false)
     var applicationStartDate: LocalDate,
@@ -38,17 +39,11 @@ class VolunteerPost(
     @Column(name = "is_regular", nullable = false)
     var isRegular: Boolean,
 
-    @Column(name = "place", nullable = false)
-    var place: String,
-
-    @Column(name = "time", nullable = false)
-    var time: String,
-
     @Column(name = "personnel", nullable = false)
     var personnel: String,
 
     @Column(name = "created_at", nullable = false)
-    val createAt: LocalDateTime = LocalDateTime.now(),
+    val createdAt: LocalDateTime = LocalDateTime.now(),
 
     @Column(name = "updated_at")
     var updatedAt: LocalDateTime = LocalDateTime.now(),
@@ -59,27 +54,21 @@ class VolunteerPost(
     fun modifyPost(
         isRegular: Boolean,
         title: String,
-        activityDetails: String?,
         applicationStartDate: LocalDate,
         applicationEndDate: LocalDate,
         workStartDate: LocalDate?,
         workEndDate: LocalDate?,
         dayOfWeek: String?,
-        place: String,
-        time: String,
         personnel: String,
         updatedAt: LocalDateTime
     ) {
         this.isRegular = isRegular
         this.title = title
-        this.activityDetails = activityDetails
         this.applicationStartDate = applicationStartDate
         this.applicationEndDate = applicationEndDate
         this.workStartDate = workStartDate
         this.workEndDate = workEndDate
         this.dayOfWeek = dayOfWeek
-        this.place = place
-        this.time = time
         this.personnel = personnel
         this.updatedAt = LocalDateTime.now()
     }
