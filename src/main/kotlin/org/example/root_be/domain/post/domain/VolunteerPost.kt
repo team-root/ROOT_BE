@@ -17,9 +17,9 @@ class VolunteerPost(
     @Column(name = "title", nullable = false)
     var title: String,
 
-    @OneToOne
+    @OneToOne(cascade = [CascadeType.ALL])
     @JoinColumn(name = "detail_id")
-    var volunteerDetail: VolunteerDetail? = null,
+    var volunteerDetail: VolunteerDetail,
 
     @Column(name = "application_start_date", nullable = false)
     var applicationStartDate: LocalDate,
@@ -48,7 +48,7 @@ class VolunteerPost(
     @Column(name = "updated_at")
     var updatedAt: LocalDateTime = LocalDateTime.now(),
 
-    @OneToMany(mappedBy = "volunteerPost")
+    @OneToMany(mappedBy = "volunteerPost", cascade = [CascadeType.ALL])
     val roles: List<VolunteerRole> = listOf()
 ) {
     fun modifyPost(

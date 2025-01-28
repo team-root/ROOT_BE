@@ -24,11 +24,21 @@ class GenerateVolunteerPostService(
         val applicationDate = request.applicationPeriod.first()
         val workDate = request.workDate?.firstOrNull()
 
+        val detail =
+            request.run {
+                VolunteerDetail(
+                    activityDetails = activityDetails,
+                    place = place,
+                    time = time,
+                )
+            }
+
         val volunteerPost =
             request.run {
                 VolunteerPost(
                     isRegular = isRegular,
                     title = title,
+                    volunteerDetail = detail,
                     applicationStartDate = applicationDate.startDate,
                     applicationEndDate = applicationDate.endDate,
                     workStartDate = workDate?.startDate,
@@ -39,26 +49,9 @@ class GenerateVolunteerPostService(
                 )
             }
 
-        saveDetail(volunteerPost, request)
         saveRoles(request, volunteerPost)
-        volunteerPostRepository.save(volunteerPost)
-    }
-
-    @Transactional
-    fun saveDetail(
-        volunteerPost: VolunteerPost,
-        request: GenerateVolunteerPostRequest
-    ) {
-        val detail =
-            request.run {
-                VolunteerDetail(
-                    activityDetails = activityDetails,
-                    place = place,
-                    time = time,
-                    volunteerPost = volunteerPost
-                )
-            }
         volunteerDetailRepository.save(detail)
+        volunteerPostRepository.save(volunteerPost)
     }
 
     @Transactional
