@@ -24,5 +24,5 @@ class Schedule(
     val createdAt: LocalDateTime = LocalDateTime.now(),
 
     @Column(name = "updated_at")
-    var updatedAt: LocalDateTime
+    var updatedAt: LocalDateTime? = null
 )
