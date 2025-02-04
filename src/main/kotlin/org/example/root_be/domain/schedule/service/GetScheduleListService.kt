@@ -11,9 +11,16 @@ class GetScheduleListService(
 ) {
     @Transactional
     fun execute(): GetScheduleListResponse {
-        return GetScheduleListResponse(
-            scheduleRepository.findBy()
-                .map { GetScheduleListResponse.ScheduleElement(it) }
-        )
+        val dates = scheduleRepository.findAll()
+
+        val scheduleResponses =  dates.groupBy { it.title }
+            .map { (title, date) ->
+                val id = date.first().id
+                val startDate = date.minOf { it.date }
+                val endDate = date.maxOf { it.date }
+                GetScheduleListResponse.ScheduleResponse(id, title, startDate, endDate)
+            }
+
+        return GetScheduleListResponse(scheduleResponses)
     }
 }
