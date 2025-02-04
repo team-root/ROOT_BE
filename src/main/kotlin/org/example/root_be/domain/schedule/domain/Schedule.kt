@@ -14,11 +14,8 @@ class Schedule(
     @Column(name = "title", nullable = false)
     var title: String,
 
-    @Column(name = "start_date", nullable = false)
-    var startDate: LocalDate,
-
-    @Column(name = "end_date", nullable = false)
-    var endDate: LocalDate,
+    @Column(name = "date", nullable = false)
+    val date: LocalDate,
 
     @Column(name = "created_at", nullable = false)
     val createdAt: LocalDateTime = LocalDateTime.now(),
