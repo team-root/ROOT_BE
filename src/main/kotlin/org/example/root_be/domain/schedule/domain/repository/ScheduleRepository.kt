@@ -5,4 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository
 
 interface ScheduleRepository: JpaRepository<Schedule, Long> {
     fun findBy(): List<Schedule>
+    fun findByTitle(title: String): List<Schedule>
 }
