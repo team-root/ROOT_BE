@@ -4,19 +4,11 @@ import org.example.root_be.domain.schedule.domain.Schedule
 import java.time.LocalDate
 
 data class GetScheduleListResponse(
-    val events: List<ScheduleElement>
+    val events: List<ScheduleResponse>
 ) {
-    data class ScheduleElement(
+    data class ScheduleResponse(
         val title: String,
         val startDate: LocalDate,
         val endDate: LocalDate,
-    ) {
-        constructor(
-            schedule: Schedule
-        ): this(
-            schedule.title,
-            schedule.startDate,
-            schedule.endDate
-        )
-    }
+    )
 }
