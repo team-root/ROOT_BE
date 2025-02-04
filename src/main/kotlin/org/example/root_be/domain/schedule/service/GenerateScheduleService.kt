@@ -5,7 +5,7 @@ import org.example.root_be.domain.schedule.domain.Schedule
 import org.example.root_be.domain.schedule.domain.repository.ScheduleRepository
 import org.example.root_be.domain.schedule.presentation.dto.request.GenerateScheduleRequest
 import org.springframework.stereotype.Service
-import java.time.LocalDateTime
+import java.time.LocalDate
 
 @Service
 class GenerateScheduleService(
@@ -15,15 +15,20 @@ class GenerateScheduleService(
     fun execute(
         request: GenerateScheduleRequest
     ) {
-        val schedule =
-            request.run {
+        val dates = generateDates(request.startDate, request.endDate)
+
+        scheduleRepository.saveAll(
+            dates.map {
                 Schedule(
-                    title = title,
-                    startDate = startDate,
-                    endDate = endDate,
-                    createdAt = LocalDateTime.now()
+                    title = request.title,
+                    date = it
                 )
             }
-        scheduleRepository.save(schedule)
+        )
+    }
+
+    private fun generateDates(start: LocalDate, end: LocalDate): List<LocalDate> {
+        return (0..java.time.temporal.ChronoUnit.DAYS.between(start, end))
+            .map { start.plusDays(it) }
     }
 }
