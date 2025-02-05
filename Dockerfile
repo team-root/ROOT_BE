@@ -1,7 +1,16 @@
 FROM amazoncorretto:17 AS build
-COPY . .
-RUN chmod +x gradlew && ./gradlew bootJar
+
+WORKDIR /app
+COPY build.gradle* settings.gradle* ./
+COPY gradle gradle
+COPY gradlew .
+RUN chmod +x gradlew && ./gradlew dependencies --no-daemon
+
+COPY src src
+RUN ./gradlew bootJar --no-daemon
 
 FROM amazoncorretto:17-alpine
-COPY --from=build build/libs/*.jar /app.jar
-ENTRYPOINT ["java", "-jar", "/app.jar"]
+WORKDIR /app
+COPY --from=build /app/build/libs/*.jar app.jar
+
+ENTRYPOINT ["java", "-jar", "app.jar"]
