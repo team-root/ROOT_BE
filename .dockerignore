@@ -1,0 +1,9 @@
+.git
+.gitignore
+.gitattributes
+.github
+
+.env
+.env.*
+
+.DS_Store
