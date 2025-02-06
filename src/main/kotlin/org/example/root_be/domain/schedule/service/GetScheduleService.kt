@@ -1,6 +1,6 @@
 package org.example.root_be.domain.schedule.service
 
-import jakarta.transaction.Transactional
+import org.springframework.transaction.annotation.Transactional
 import org.example.root_be.domain.schedule.domain.repository.ScheduleRepository
 import org.example.root_be.domain.schedule.facade.ScheduleFacade
 import org.example.root_be.domain.schedule.presentation.dto.response.GetScheduleResponse
@@ -12,7 +12,7 @@ class GetScheduleService(
     private val scheduleRepository: ScheduleRepository,
     private val scheduleFacade: ScheduleFacade
 ) {
-    @Transactional
+    @Transactional(readOnly = true)
     fun execute(
         date: LocalDate
     ): GetScheduleResponse {
