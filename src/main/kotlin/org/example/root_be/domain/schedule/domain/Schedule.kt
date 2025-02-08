@@ -22,4 +22,11 @@ class Schedule(
 
     @Column(name = "updated_at")
     var updatedAt: LocalDateTime? = null
-)
+) {
+    fun modifySchedule(
+        title: String,
+    ) {
+        this.title = title
+        this.updatedAt = LocalDateTime.now()
+    }
+}
