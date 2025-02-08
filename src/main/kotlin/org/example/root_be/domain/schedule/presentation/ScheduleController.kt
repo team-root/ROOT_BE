@@ -4,10 +4,8 @@ import org.example.root_be.domain.schedule.presentation.dto.request.GenerateSche
 import org.example.root_be.domain.schedule.presentation.dto.request.ModifyScheduleRequest
 import org.example.root_be.domain.schedule.presentation.dto.response.GetScheduleListResponse
 import org.example.root_be.domain.schedule.presentation.dto.response.GetScheduleResponse
-import org.example.root_be.domain.schedule.service.GenerateScheduleService
-import org.example.root_be.domain.schedule.service.GetScheduleListService
-import org.example.root_be.domain.schedule.service.GetScheduleService
-import org.example.root_be.domain.schedule.service.ModifyScheduleService
+import org.example.root_be.domain.schedule.service.*
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -23,7 +21,8 @@ class ScheduleController(
     private val generateScheduleService: GenerateScheduleService,
     private val getScheduleListService: GetScheduleListService,
     private val getScheduleService: GetScheduleService,
-    private val modifyScheduleService: ModifyScheduleService
+    private val modifyScheduleService: ModifyScheduleService,
+    private val deleteScheduleService: DeleteScheduleService
 ) {
     @PostMapping
     fun generateSchedule(
@@ -50,5 +49,12 @@ class ScheduleController(
         @RequestBody request: ModifyScheduleRequest
     ) {
         modifyScheduleService.execute(date, request)
+    }
+
+    @DeleteMapping("/{date}")
+    fun deleteSchedule(
+        @PathVariable date: LocalDate
+    ) {
+        deleteScheduleService.execute(date)
     }
 }
