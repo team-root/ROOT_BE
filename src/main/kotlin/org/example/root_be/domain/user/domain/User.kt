@@ -40,4 +40,10 @@ class User(
     fun addVolunteerTime(time: Int) {
         this.totalVolunteerTime += time
     }
+
+    fun grantVolunteerRole(
+        volunteerRole: VolunteerRole
+    ) {
+        this.volunteerRole = volunteerRole
+    }
 }
