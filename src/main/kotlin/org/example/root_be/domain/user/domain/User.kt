@@ -34,7 +34,7 @@ class User(
     var totalVolunteerTime: Int,
 
     @OneToOne
-    @Column(name = "volunteer_role")
+    @JoinColumn(name = "volunteer_role_id")
     var volunteerRole: VolunteerRole? = null
 ) {
     fun addVolunteerTime(time: Int) {
