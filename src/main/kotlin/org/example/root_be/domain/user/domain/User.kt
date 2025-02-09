@@ -1,6 +1,7 @@
 package org.example.root_be.domain.user.domain
 
 import jakarta.persistence.*
+import org.example.root_be.domain.role.domain.VolunteerRole
 import org.example.root_be.domain.user.domain.type.Role
 
 @Entity
@@ -30,8 +31,12 @@ class User(
     var userRole: Role,
 
     @Column(name = "total_volunteer_time", nullable = false)
-    var totalVolunteerTime: Int
-){
+    var totalVolunteerTime: Int,
+
+    @OneToOne
+    @Column(name = "volunteer_role")
+    var volunteerRole: VolunteerRole? = null
+) {
     fun addVolunteerTime(time: Int) {
         this.totalVolunteerTime += time
     }
