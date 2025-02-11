@@ -52,7 +52,8 @@ class LoginService(
                 grade = userInfo.grade,
                 classNum = userInfo.classNum,
                 userRole = role,
-                totalVolunteerTime = 0
+                totalVolunteerTime = 0,
+                fcmToken = loginRequest.fcmToken
             )
         )
 
