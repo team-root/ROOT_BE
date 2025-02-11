@@ -30,6 +30,8 @@ dependencies {
     implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
     implementation("io.github.openfeign:feign-httpclient:13.5")
     implementation("io.jsonwebtoken:jjwt-api:0.11.5")
+    implementation("com.google.firebase:firebase-admin:6.8.1")
+    implementation("com.squareup.okhttp3:okhttp:4.9.1")
     runtimeOnly("io.jsonwebtoken:jjwt-impl:0.11.5")
     runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.11.5")
     runtimeOnly("com.mysql:mysql-connector-j")
