@@ -35,7 +35,10 @@ class User(
 
     @OneToOne
     @JoinColumn(name = "volunteer_role_id")
-    var volunteerRole: VolunteerRole? = null
+    var volunteerRole: VolunteerRole? = null,
+
+    @Column(name = "fcm_token")
+    var fcmToken: String?
 ) {
     fun addVolunteerTime(time: Int) {
         this.totalVolunteerTime += time
