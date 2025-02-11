@@ -38,3 +38,6 @@ out/
 
 ### Kotlin ###
 .kotlin
+
+### FireBase ###
+/src/main/resources/firebase/firebase_service_key.json
