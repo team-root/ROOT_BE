@@ -1,7 +1,11 @@
 package org.example.root_be.domain.user.presentation.dto.response
 
+import com.fasterxml.jackson.annotation.JsonInclude
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
 data class MypageResponse (
-    val studentNumber: Int,
-    val studentName: String,
-    val volunteerTime: Int
+    val name: String,
+    val number: Int?,
+    val area: String,
+    val volunteerTime: Int?
 )
