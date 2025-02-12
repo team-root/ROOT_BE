@@ -26,6 +26,9 @@ class User(
     @Column(name = "class_num", nullable = false)
     var classNum: Int,
 
+    @Column(name = "area", nullable = false)
+    var area: String,
+
     @Enumerated(EnumType.STRING)
     @Column(name = "user_role", nullable = false)
     var userRole: Role,
