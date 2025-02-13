@@ -23,7 +23,7 @@ class VolunteerApplication(
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "role_id")
-    val volunteerRole: VolunteerRole? = null,
+    var volunteerRole: VolunteerRole? = null,
 
     @Column(nullable = false)
     var isApplied: Boolean = false,
