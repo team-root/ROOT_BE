@@ -1,7 +1,9 @@
 package org.example.root_be.domain.user.domain
 
 import jakarta.persistence.*
+import org.example.root_be.domain.applications.domain.VolunteerApplication
 import org.example.root_be.domain.role.domain.VolunteerRole
+import org.example.root_be.domain.teacher_role.domain.TeacherRole
 import org.example.root_be.domain.user.domain.type.Role
 
 @Entity
@@ -26,9 +28,6 @@ class User(
     @Column(name = "class_num", nullable = false)
     var classNum: Int,
 
-    @Column(name = "area", nullable = false)
-    var area: String,
-
     @Enumerated(EnumType.STRING)
     @Column(name = "user_role", nullable = false)
     var userRole: Role,
@@ -36,20 +35,16 @@ class User(
     @Column(name = "total_volunteer_time", nullable = false)
     var totalVolunteerTime: Int,
 
-    @OneToOne
-    @JoinColumn(name = "volunteer_role_id")
-    var volunteerRole: VolunteerRole? = null,
+    @OneToMany(mappedBy = "user", cascade = [CascadeType.ALL], orphanRemoval = true)
+    val volunteerApplications: List<VolunteerApplication> = listOf(),
+
+    @OneToMany(mappedBy = "teacher_role", cascade = [CascadeType.ALL], orphanRemoval = true)
+    val teacherRoles: List<TeacherRole> = listOf(),
 
     @Column(name = "fcm_token")
     var fcmToken: String?
 ) {
     fun addVolunteerTime(time: Int) {
         this.totalVolunteerTime += time
-    }
-
-    fun grantVolunteerRole(
-        volunteerRole: VolunteerRole
-    ) {
-        this.volunteerRole = volunteerRole
     }
 }

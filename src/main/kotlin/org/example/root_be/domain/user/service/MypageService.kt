@@ -14,13 +14,17 @@ class MypageService(
             Role.STUDENT -> MypageResponse(
                 name = user.name,
                 number = user.num,
-                area = user.area,
+                area = user.volunteerApplications
+                    .mapNotNull { application -> application.volunteerRole?.title }
+                    .distinct(),
                 volunteerTime = user.totalVolunteerTime
             )
             Role.ADMIN -> MypageResponse(
                 name = user.name,
                 number = null,
-                area = user.area,
+                area = user.teacherRoles
+                    .map { role -> role.title }
+                    .distinct(),
                 volunteerTime = null
             )
         }
