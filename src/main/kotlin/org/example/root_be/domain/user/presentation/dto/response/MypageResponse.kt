@@ -6,6 +6,6 @@ import com.fasterxml.jackson.annotation.JsonInclude
 data class MypageResponse (
     val name: String,
     val number: Int?,
-    val area: String,
+    val area: List<String>,
     val volunteerTime: Int?
 )
