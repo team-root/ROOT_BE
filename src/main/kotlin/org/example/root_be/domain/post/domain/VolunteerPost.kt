@@ -60,7 +60,6 @@ class VolunteerPost(
         applicationEndDate: LocalDate,
         workStartDate: LocalDate?,
         workEndDate: LocalDate?,
-        dayOfWeek: MutableList<PostDay>,
         personnel: String,
         updatedAt: LocalDateTime
     ) {
@@ -70,7 +69,6 @@ class VolunteerPost(
         this.applicationEndDate = applicationEndDate
         this.workStartDate = workStartDate
         this.workEndDate = workEndDate
-        this.dayOfWeek = dayOfWeek
         this.personnel = personnel
         this.updatedAt = LocalDateTime.now()
     }
