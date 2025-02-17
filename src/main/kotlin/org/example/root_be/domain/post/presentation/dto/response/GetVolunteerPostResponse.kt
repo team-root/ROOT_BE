@@ -1,18 +1,20 @@
 package org.example.root_be.domain.post.presentation.dto.response
 
 import com.fasterxml.jackson.annotation.JsonFormat
+import com.fasterxml.jackson.annotation.JsonInclude
 import org.example.root_be.domain.detail.domain.VolunteerDetail
 import org.example.root_be.domain.post.domain.VolunteerPost
 import org.example.root_be.domain.post_day.domain.PostDay
 import java.time.LocalDate
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 data class GetVolunteerPostResponse(
     val id: Long,
     val title: String,
     val activityDetails: String?,
     val applicationPeriod: List<ApplicationPeriodResponse>,
     val workDate: List<WorkDateResponse>?,
-    val dayOfWeek: List<DayOfWeekResponse>,
+    val dayOfWeek: List<DayOfWeekResponse>?,
     val place: String,
     val time: String,
     val personnel: String,
