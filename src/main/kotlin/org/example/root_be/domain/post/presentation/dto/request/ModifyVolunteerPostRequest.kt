@@ -23,7 +23,7 @@ data class ModifyVolunteerPostRequest(
 
     val workDate: List<WorkDateElement>?,
 
-    val dayOfWeek: String?,
+    val dayOfWeek: List<DayOfWeekElement>?,
 
     @field:NotNull
     val place: String,
@@ -54,5 +54,10 @@ data class ModifyVolunteerPostRequest(
     data class RoleElement(
         val roleId: Long?,
         val title: String
+    )
+
+    data class DayOfWeekElement(
+        val dayId: Long,
+        val dayOfWeek: String
     )
 }
