@@ -1,17 +1,17 @@
 package org.example.root_be.domain.post.service
 
-import jakarta.transaction.Transactional
 import org.example.root_be.domain.detail.facade.DetailFacade
 import org.example.root_be.domain.post.facade.VolunteerFacade
 import org.example.root_be.domain.post.presentation.dto.response.GetVolunteerPostResponse
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 @Service
 class GetVolunteerPostDetailsService(
     private val volunteerFacade: VolunteerFacade,
     private val detailsFacade: DetailFacade
 ) {
-    @Transactional
+    @Transactional(readOnly = true)
     fun execute(
         postId: Long
     ): GetVolunteerPostResponse {
