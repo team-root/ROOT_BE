@@ -35,7 +35,6 @@ class VolunteerPost(
     var workEndDate: LocalDate?,
 
     @OneToMany(mappedBy = "volunteerPost", cascade = [CascadeType.ALL], orphanRemoval = true)
-    @JoinColumn(name = "post_id")
     var dayOfWeek: MutableList<PostDay> = mutableListOf(),
 
     @Column(name = "is_regular", nullable = false)
