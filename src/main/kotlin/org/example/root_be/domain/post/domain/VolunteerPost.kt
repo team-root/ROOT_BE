@@ -2,6 +2,7 @@ package org.example.root_be.domain.post.domain
 
 import jakarta.persistence.*
 import org.example.root_be.domain.detail.domain.VolunteerDetail
+import org.example.root_be.domain.post_day.domain.PostDay
 import org.example.root_be.domain.role.domain.VolunteerRole
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -33,8 +34,8 @@ class VolunteerPost(
     @Column(name = "work_end_date")
     var workEndDate: LocalDate?,
 
-    @Column(name = "day_of_week")
-    var dayOfWeek: String?,
+    @OneToMany(mappedBy = "volunteerPost", cascade = [CascadeType.ALL], orphanRemoval = true)
+    var dayOfWeek: MutableList<PostDay> = mutableListOf(),
 
     @Column(name = "is_regular", nullable = false)
     var isRegular: Boolean,
@@ -48,7 +49,7 @@ class VolunteerPost(
     @Column(name = "updated_at")
     var updatedAt: LocalDateTime = LocalDateTime.now(),
 
-    @OneToMany(mappedBy = "volunteerPost", cascade = [CascadeType.ALL])
+    @OneToMany(mappedBy = "volunteerPost", cascade = [CascadeType.ALL], orphanRemoval = true)
     val roles: List<VolunteerRole> = listOf()
 ) {
     fun modifyPost(
@@ -58,7 +59,6 @@ class VolunteerPost(
         applicationEndDate: LocalDate,
         workStartDate: LocalDate?,
         workEndDate: LocalDate?,
-        dayOfWeek: String?,
         personnel: String,
         updatedAt: LocalDateTime
     ) {
@@ -68,7 +68,6 @@ class VolunteerPost(
         this.applicationEndDate = applicationEndDate
         this.workStartDate = workStartDate
         this.workEndDate = workEndDate
-        this.dayOfWeek = dayOfWeek
         this.personnel = personnel
         this.updatedAt = LocalDateTime.now()
     }

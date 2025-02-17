@@ -8,6 +8,8 @@ import org.example.root_be.domain.role.domain.repository.RoleRepository
 import org.example.root_be.domain.post.domain.VolunteerPost
 import org.example.root_be.domain.post.domain.repository.VolunteerPostRepository
 import org.example.root_be.domain.post.presentation.dto.request.GenerateVolunteerPostRequest
+import org.example.root_be.domain.post_day.domain.PostDay
+import org.example.root_be.domain.post_day.domain.repository.PostDayRepository
 import org.springframework.stereotype.Service
 import java.time.LocalDateTime
 
@@ -15,7 +17,8 @@ import java.time.LocalDateTime
 class GenerateVolunteerPostService(
     private val volunteerPostRepository: VolunteerPostRepository,
     private val roleRepository: RoleRepository,
-    private val volunteerDetailRepository: VolunteerDetailRepository
+    private val volunteerDetailRepository: VolunteerDetailRepository,
+    private val postDayRepository: PostDayRepository
 ) {
     @Transactional
     fun execute(
@@ -33,6 +36,7 @@ class GenerateVolunteerPostService(
                 )
             }
 
+
         val volunteerPost =
             request.run {
                 VolunteerPost(
@@ -43,13 +47,21 @@ class GenerateVolunteerPostService(
                     applicationEndDate = applicationDate.endDate,
                     workStartDate = workDate?.startDate,
                     workEndDate = workDate?.endDate,
-                    dayOfWeek = dayOfWeek,
                     personnel = personnel,
                     createdAt = LocalDateTime.now(),
                 )
             }
 
+        val dayOfWeek =
+            request.dayOfWeek.map {
+                PostDay(
+                    dayOfWeek = it.dayOfWeek,
+                    volunteerPost = volunteerPost
+                )
+            }
+
         saveRoles(request, volunteerPost)
+        postDayRepository.saveAll(dayOfWeek)
         volunteerDetailRepository.save(detail)
         volunteerPostRepository.save(volunteerPost)
     }

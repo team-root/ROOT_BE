@@ -1,17 +1,20 @@
 package org.example.root_be.domain.post.presentation.dto.response
 
 import com.fasterxml.jackson.annotation.JsonFormat
+import com.fasterxml.jackson.annotation.JsonInclude
 import org.example.root_be.domain.detail.domain.VolunteerDetail
 import org.example.root_be.domain.post.domain.VolunteerPost
+import org.example.root_be.domain.post_day.domain.PostDay
 import java.time.LocalDate
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 data class GetVolunteerPostResponse(
     val id: Long,
     val title: String,
     val activityDetails: String?,
     val applicationPeriod: List<ApplicationPeriodResponse>,
     val workDate: List<WorkDateResponse>?,
-    val dayOfWeek: String?,
+    val dayOfWeek: List<DayOfWeekResponse>?,
     val place: String,
     val time: String,
     val personnel: String,
@@ -19,14 +22,14 @@ data class GetVolunteerPostResponse(
 ) {
     constructor(
         volunteerPost: VolunteerPost,
-        volunteerDetail: VolunteerDetail
+        volunteerDetail: VolunteerDetail,
     ): this(
         id = volunteerPost.id,
         title = volunteerPost.title,
         activityDetails = volunteerDetail.activityDetails,
         applicationPeriod = listOf(ApplicationPeriodResponse(volunteerPost)),
         workDate = listOf(WorkDateResponse(volunteerPost)),
-        dayOfWeek = volunteerPost.dayOfWeek,
+        dayOfWeek = volunteerPost.dayOfWeek.map { DayOfWeekResponse(it.id, it.dayOfWeek) },
         place = volunteerDetail.place,
         time = volunteerDetail.time,
         personnel = volunteerPost.personnel,
@@ -59,5 +62,10 @@ data class GetVolunteerPostResponse(
     data class RoleResponse(
         val id: Long,
         val title: String
+    )
+
+    data class DayOfWeekResponse(
+        val id: Long,
+        val dayOfWeek: String
     )
 }
