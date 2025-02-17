@@ -50,7 +50,7 @@ class VolunteerPost(
     @Column(name = "updated_at")
     var updatedAt: LocalDateTime = LocalDateTime.now(),
 
-    @OneToMany(mappedBy = "volunteerPost", cascade = [CascadeType.ALL])
+    @OneToMany(mappedBy = "volunteerPost", cascade = [CascadeType.ALL], orphanRemoval = true)
     val roles: List<VolunteerRole> = listOf()
 ) {
     fun modifyPost(
