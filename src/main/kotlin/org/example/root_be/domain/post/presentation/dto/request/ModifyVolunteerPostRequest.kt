@@ -23,7 +23,7 @@ data class ModifyVolunteerPostRequest(
 
     val workDate: List<WorkDateElement>?,
 
-    val dayOfWeek: List<DayOfWeekElement>?,
+    val dayOfWeek: MutableList<DayOfWeekElement>?,
 
     @field:NotNull
     val place: String,
