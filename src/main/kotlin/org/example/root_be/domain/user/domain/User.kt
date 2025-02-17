@@ -38,7 +38,7 @@ class User(
     @OneToMany(mappedBy = "user", cascade = [CascadeType.ALL], orphanRemoval = true)
     val volunteerApplications: List<VolunteerApplication> = listOf(),
 
-    @OneToMany(mappedBy = "teacher_role", cascade = [CascadeType.ALL], orphanRemoval = true)
+    @OneToMany(cascade = [CascadeType.ALL], orphanRemoval = true)
     val teacherRoles: List<TeacherRole> = listOf(),
 
     @Column(name = "fcm_token")
