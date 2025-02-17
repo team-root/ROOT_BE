@@ -23,7 +23,6 @@ data class GetVolunteerPostResponse(
     constructor(
         volunteerPost: VolunteerPost,
         volunteerDetail: VolunteerDetail,
-        postDay: PostDay
     ): this(
         id = volunteerPost.id,
         title = volunteerPost.title,
