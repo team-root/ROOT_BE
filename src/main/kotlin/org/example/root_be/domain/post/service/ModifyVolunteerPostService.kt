@@ -7,6 +7,9 @@ import org.example.root_be.domain.post.domain.VolunteerPost
 import org.example.root_be.domain.post.domain.repository.VolunteerPostRepository
 import org.example.root_be.domain.post.facade.VolunteerFacade
 import org.example.root_be.domain.post.presentation.dto.request.ModifyVolunteerPostRequest
+import org.example.root_be.domain.post_day.domain.PostDay
+import org.example.root_be.domain.post_day.domain.repository.PostDayRepository
+import org.example.root_be.domain.post_day.exception.PostDayNotFoundException
 import org.example.root_be.domain.role.domain.VolunteerRole
 import org.example.root_be.domain.role.domain.repository.RoleRepository
 import org.example.root_be.domain.role.exception.VolunteerRoleNotFoundException
@@ -19,7 +22,8 @@ class ModifyVolunteerPostService(
     private val volunteerFacade: VolunteerFacade,
     private val roleRepository: RoleRepository,
     private val detailFacade: DetailFacade,
-    private val volunteerDetailRepository: VolunteerDetailRepository
+    private val volunteerDetailRepository: VolunteerDetailRepository,
+    private val postDayRepository: PostDayRepository
 ) {
     @Transactional
     fun execute(
@@ -38,13 +42,13 @@ class ModifyVolunteerPostService(
             applicationEndDate = applicationDate.endDate,
             workStartDate = workDate?.startDate,
             workEndDate = workDate?.endDate,
-            dayOfWeek = request.dayOfWeek,
             personnel = request.personnel,
             updatedAt = LocalDateTime.now()
         )
 
         saveDetail(request, post)
         saveRoles(request, post)
+        saveDayOfWeek(request, post)
         volunteerPostRepository.save(post)
     }
 
@@ -97,6 +101,33 @@ class ModifyVolunteerPostService(
 
         if (newRoles.isNotEmpty()) {
             roleRepository.saveAll(newRoles)
+        }
+    }
+
+    @Transactional
+    fun saveDayOfWeek(
+        request: ModifyVolunteerPostRequest,
+        post: VolunteerPost
+    ) {
+        val modifyDayOfWeekIds = request.dayOfWeek
+            ?.map { it.dayId }?.toSet()
+            ?: setOf()
+
+        val existingPostDays = postDayRepository.findAllByVolunteerPost(post)
+
+        val deleteDayOfWeeks = existingPostDays.filter { (it.id !in modifyDayOfWeekIds) }
+        postDayRepository.deleteAll(deleteDayOfWeeks)
+
+        val addDayOfWeeks = mutableListOf<PostDay>()
+
+        request.dayOfWeek?.forEach { dayOfWeekRequest ->
+            existingPostDays.find {it.id == dayOfWeekRequest.dayId}
+                ?.apply { dayOfWeek = dayOfWeekRequest.dayOfWeek }
+                ?: throw PostDayNotFoundException
+        }
+
+        if (addDayOfWeeks.isNotEmpty()) {
+            postDayRepository.saveAll(addDayOfWeeks)
         }
     }
 }
