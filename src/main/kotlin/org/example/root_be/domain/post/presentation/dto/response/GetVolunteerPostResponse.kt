@@ -28,7 +28,7 @@ data class GetVolunteerPostResponse(
         activityDetails = volunteerDetail.activityDetails,
         applicationPeriod = listOf(ApplicationPeriodResponse(volunteerPost)),
         workDate = listOf(WorkDateResponse(volunteerPost)),
-        dayOfWeek = volunteerPost.dayOfWeek.map { DayOfWeekResponse(it.id, it.dayOfWeek) },
+        dayOfWeek = volunteerPost.weekDays.map { DayOfWeekResponse(it.id, it.dayOfWeek) },
         place = volunteerDetail.place,
         time = volunteerDetail.time,
         personnel = volunteerPost.personnel,
