@@ -1,11 +1,11 @@
-package org.example.root_be.domain.day_of_week.domain
+package org.example.root_be.domain.week_days.domain
 
 import jakarta.persistence.*
 import org.example.root_be.domain.post.domain.VolunteerPost
 
 @Entity
-@Table(name = "DAY_OF_WEEK")
-class DayOfWeek(
+@Table(name = "WEEK_DAYS")
+class WeekDays(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0L,

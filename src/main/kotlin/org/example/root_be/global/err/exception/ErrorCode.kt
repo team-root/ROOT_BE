@@ -12,7 +12,7 @@ enum class ErrorCode(
     VOLUNTEER_DETAIL_NOT_FOUND("Detail Not Found", 404),
     SCHEDULE_NOT_FOUND("Schedule Not Found", 404),
     USER_NOT_FOUND("User Not Found", 404),
-    DAY_OF_WEEK_NOT_FOUND("Day Of Week Not Found", 404),
+    WEEK_DAYS_NOT_FOUND("Week Days Not Found", 404),
     INVALID_PASSWORD("Invalid Password", 401),
     FEIGN_BAD_REQUEST("External API request is invalid.", 400),
     FEIGN_SERVER_ERROR("An external server error occurred.", 500),

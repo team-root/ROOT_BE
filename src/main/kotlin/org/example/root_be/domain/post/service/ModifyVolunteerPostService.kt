@@ -7,9 +7,9 @@ import org.example.root_be.domain.post.domain.VolunteerPost
 import org.example.root_be.domain.post.domain.repository.VolunteerPostRepository
 import org.example.root_be.domain.post.facade.VolunteerFacade
 import org.example.root_be.domain.post.presentation.dto.request.ModifyVolunteerPostRequest
-import org.example.root_be.domain.day_of_week.domain.DayOfWeek
-import org.example.root_be.domain.day_of_week.domain.repository.DayOfWeekRepository
-import org.example.root_be.domain.day_of_week.exception.DayOfWeekNotFoundException
+import org.example.root_be.domain.week_days.domain.WeekDays
+import org.example.root_be.domain.week_days.domain.repository.WeekDaysRepository
+import org.example.root_be.domain.week_days.exception.WeekDaysNotFoundException
 import org.example.root_be.domain.role.domain.VolunteerRole
 import org.example.root_be.domain.role.domain.repository.RoleRepository
 import org.example.root_be.domain.role.exception.VolunteerRoleNotFoundException
@@ -23,7 +23,7 @@ class ModifyVolunteerPostService(
     private val roleRepository: RoleRepository,
     private val detailFacade: DetailFacade,
     private val volunteerDetailRepository: VolunteerDetailRepository,
-    private val postDayRepository: DayOfWeekRepository
+    private val postDayRepository: WeekDaysRepository
 ) {
     @Transactional
     fun execute(
@@ -118,16 +118,16 @@ class ModifyVolunteerPostService(
         val deleteDayOfWeeks = existingPostDays.filter { (it.id !in modifyDayOfWeekIds) }
         postDayRepository.deleteAll(deleteDayOfWeeks)
 
-        val addDayOfWeeks = mutableListOf<DayOfWeek>()
+        val addWeekDays = mutableListOf<WeekDays>()
 
         request.dayOfWeek?.forEach { dayOfWeekRequest ->
             existingPostDays.find {it.id == dayOfWeekRequest.dayId}
                 ?.apply { dayOfWeek = dayOfWeekRequest.dayOfWeek }
-                ?: throw DayOfWeekNotFoundException
+                ?: throw WeekDaysNotFoundException
         }
 
-        if (addDayOfWeeks.isNotEmpty()) {
-            postDayRepository.saveAll(addDayOfWeeks)
+        if (addWeekDays.isNotEmpty()) {
+            postDayRepository.saveAll(addWeekDays)
         }
     }
 }
