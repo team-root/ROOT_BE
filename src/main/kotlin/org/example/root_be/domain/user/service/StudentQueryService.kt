@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional
 class StudentQueryService (
     val userRepository: UserRepository
 ){
-    @Transactional
+    @Transactional(readOnly = true)
     fun execute(): StudentQueryResponse {
         val students = userRepository.findAll()
             .map { user ->

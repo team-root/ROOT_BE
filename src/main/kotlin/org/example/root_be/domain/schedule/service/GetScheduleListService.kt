@@ -1,15 +1,15 @@
 package org.example.root_be.domain.schedule.service
 
-import jakarta.transaction.Transactional
 import org.example.root_be.domain.schedule.domain.repository.ScheduleRepository
 import org.example.root_be.domain.schedule.presentation.dto.response.GetScheduleListResponse
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 @Service
 class GetScheduleListService(
     private val scheduleRepository: ScheduleRepository
 ) {
-    @Transactional
+    @Transactional(readOnly = true)
     fun execute(): GetScheduleListResponse {
         val dates = scheduleRepository.findAll()
 
