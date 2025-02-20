@@ -8,8 +8,8 @@ import org.example.root_be.domain.role.domain.repository.RoleRepository
 import org.example.root_be.domain.post.domain.VolunteerPost
 import org.example.root_be.domain.post.domain.repository.VolunteerPostRepository
 import org.example.root_be.domain.post.presentation.dto.request.GenerateVolunteerPostRequest
-import org.example.root_be.domain.post_day.domain.PostDay
-import org.example.root_be.domain.post_day.domain.repository.PostDayRepository
+import org.example.root_be.domain.post_day.domain.DayOfWeek
+import org.example.root_be.domain.post_day.domain.repository.DayOfWeekRepository
 import org.springframework.stereotype.Service
 import java.time.LocalDateTime
 
@@ -18,7 +18,7 @@ class GenerateVolunteerPostService(
     private val volunteerPostRepository: VolunteerPostRepository,
     private val roleRepository: RoleRepository,
     private val volunteerDetailRepository: VolunteerDetailRepository,
-    private val postDayRepository: PostDayRepository
+    private val postDayRepository: DayOfWeekRepository
 ) {
     @Transactional
     fun execute(
@@ -54,7 +54,7 @@ class GenerateVolunteerPostService(
 
         val dayOfWeek =
             request.dayOfWeek.map {
-                PostDay(
+                DayOfWeek(
                     dayOfWeek = it.dayOfWeek,
                     volunteerPost = volunteerPost
                 )
