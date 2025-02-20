@@ -65,7 +65,7 @@ class FirebaseCloudMessageService(
 
         userRepository.findAll()
             .forEach {
-                it.fcmToken?.let { token ->
+                it.deviceToken?.let { token ->
                     sendDirectTo(token, title, body)
                 }
             }
@@ -77,7 +77,7 @@ class FirebaseCloudMessageService(
         body: String
     ): String {
         val alarm = FcmMessage.alarm(title = title, body = body)
-        val message = FcmMessage.Message(fcmToken = fcmToken, alarm = alarm)
+        val message = FcmMessage.Message(deviceToken = fcmToken, alarm = alarm)
         return objectMapper.writeValueAsString(FcmMessage(message = message))
     }
 

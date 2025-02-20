@@ -42,7 +42,7 @@ class User(
     val teacherRoles: List<TeacherRole> = listOf(),
 
     @Column(name = "fcm_token")
-    var fcmToken: String?
+    var deviceToken: String?
 ) {
     fun addVolunteerTime(time: Int) {
         this.totalVolunteerTime += time
