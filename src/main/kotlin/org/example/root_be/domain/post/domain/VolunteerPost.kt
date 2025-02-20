@@ -2,7 +2,7 @@ package org.example.root_be.domain.post.domain
 
 import jakarta.persistence.*
 import org.example.root_be.domain.detail.domain.VolunteerDetail
-import org.example.root_be.domain.post_day.domain.DayOfWeek
+import org.example.root_be.domain.day_of_week.domain.DayOfWeek
 import org.example.root_be.domain.role.domain.VolunteerRole
 import java.time.LocalDate
 import java.time.LocalDateTime
