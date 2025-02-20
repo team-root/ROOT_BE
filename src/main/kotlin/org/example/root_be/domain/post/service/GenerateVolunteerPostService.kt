@@ -8,8 +8,8 @@ import org.example.root_be.domain.role.domain.repository.RoleRepository
 import org.example.root_be.domain.post.domain.VolunteerPost
 import org.example.root_be.domain.post.domain.repository.VolunteerPostRepository
 import org.example.root_be.domain.post.presentation.dto.request.GenerateVolunteerPostRequest
-import org.example.root_be.domain.post_day.domain.DayOfWeek
-import org.example.root_be.domain.post_day.domain.repository.DayOfWeekRepository
+import org.example.root_be.domain.day_of_week.domain.DayOfWeek
+import org.example.root_be.domain.day_of_week.domain.repository.DayOfWeekRepository
 import org.springframework.stereotype.Service
 import java.time.LocalDateTime
 

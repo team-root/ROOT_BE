@@ -1,10 +1,10 @@
-package org.example.root_be.domain.post_day.domain
+package org.example.root_be.domain.day_of_week.domain
 
 import jakarta.persistence.*
 import org.example.root_be.domain.post.domain.VolunteerPost
 
 @Entity
-@Table(name = "POST_DAY")
+@Table(name = "DAY_OF_WEEK")
 class DayOfWeek(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

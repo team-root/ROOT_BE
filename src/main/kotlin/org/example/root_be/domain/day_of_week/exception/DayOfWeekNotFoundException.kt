@@ -1,4 +1,4 @@
-package org.example.root_be.domain.post_day.exception
+package org.example.root_be.domain.day_of_week.exception
 
 import org.example.root_be.global.err.exception.CustomException
 import org.example.root_be.global.err.exception.ErrorCode
