@@ -1,16 +1,16 @@
 package org.example.root_be.domain.applications.service
 
-import jakarta.transaction.Transactional
 import org.example.root_be.domain.applications.domain.repository.VolunteerApplicationRepository
 import org.example.root_be.domain.applications.presentation.dto.response.ApplicationElement
 import org.example.root_be.domain.applications.presentation.dto.response.GetVolunteerApplicationResponse
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 @Service
 class GetVolunteerApplicationService(
     private val volunteerApplicationRepository: VolunteerApplicationRepository,
 ) {
-    @Transactional
+    @Transactional(readOnly = true)
     fun execute(postId: Long): GetVolunteerApplicationResponse {
         val applications = volunteerApplicationRepository.findAllByVolunteerPostId(postId)
             .map { application ->
