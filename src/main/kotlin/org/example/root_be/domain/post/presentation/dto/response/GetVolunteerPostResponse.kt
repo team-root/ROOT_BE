@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonFormat
 import com.fasterxml.jackson.annotation.JsonInclude
 import org.example.root_be.domain.detail.domain.VolunteerDetail
 import org.example.root_be.domain.post.domain.VolunteerPost
-import org.example.root_be.domain.post_day.domain.PostDay
 import java.time.LocalDate
 
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
