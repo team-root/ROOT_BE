@@ -6,7 +6,7 @@ data class FcmMessage(
 ) {
     data class Message(
         val alarm: alarm,
-        val fcmToken: String
+        val deviceToken: String
     )
 
     data class alarm(
