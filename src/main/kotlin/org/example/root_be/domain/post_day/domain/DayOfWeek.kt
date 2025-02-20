@@ -5,7 +5,7 @@ import org.example.root_be.domain.post.domain.VolunteerPost
 
 @Entity
 @Table(name = "POST_DAY")
-class PostDay(
+class DayOfWeek(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0L,

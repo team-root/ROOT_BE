@@ -7,9 +7,9 @@ import org.example.root_be.domain.post.domain.VolunteerPost
 import org.example.root_be.domain.post.domain.repository.VolunteerPostRepository
 import org.example.root_be.domain.post.facade.VolunteerFacade
 import org.example.root_be.domain.post.presentation.dto.request.ModifyVolunteerPostRequest
-import org.example.root_be.domain.post_day.domain.PostDay
-import org.example.root_be.domain.post_day.domain.repository.PostDayRepository
-import org.example.root_be.domain.post_day.exception.PostDayNotFoundException
+import org.example.root_be.domain.post_day.domain.DayOfWeek
+import org.example.root_be.domain.post_day.domain.repository.DayOfWeekRepository
+import org.example.root_be.domain.post_day.exception.DayOfWeekNotFoundException
 import org.example.root_be.domain.role.domain.VolunteerRole
 import org.example.root_be.domain.role.domain.repository.RoleRepository
 import org.example.root_be.domain.role.exception.VolunteerRoleNotFoundException
@@ -23,7 +23,7 @@ class ModifyVolunteerPostService(
     private val roleRepository: RoleRepository,
     private val detailFacade: DetailFacade,
     private val volunteerDetailRepository: VolunteerDetailRepository,
-    private val postDayRepository: PostDayRepository
+    private val postDayRepository: DayOfWeekRepository
 ) {
     @Transactional
     fun execute(
@@ -118,12 +118,12 @@ class ModifyVolunteerPostService(
         val deleteDayOfWeeks = existingPostDays.filter { (it.id !in modifyDayOfWeekIds) }
         postDayRepository.deleteAll(deleteDayOfWeeks)
 
-        val addDayOfWeeks = mutableListOf<PostDay>()
+        val addDayOfWeeks = mutableListOf<DayOfWeek>()
 
         request.dayOfWeek?.forEach { dayOfWeekRequest ->
             existingPostDays.find {it.id == dayOfWeekRequest.dayId}
                 ?.apply { dayOfWeek = dayOfWeekRequest.dayOfWeek }
-                ?: throw PostDayNotFoundException
+                ?: throw DayOfWeekNotFoundException
         }
 
         if (addDayOfWeeks.isNotEmpty()) {

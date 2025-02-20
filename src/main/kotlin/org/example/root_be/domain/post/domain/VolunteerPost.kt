@@ -2,7 +2,7 @@ package org.example.root_be.domain.post.domain
 
 import jakarta.persistence.*
 import org.example.root_be.domain.detail.domain.VolunteerDetail
-import org.example.root_be.domain.post_day.domain.PostDay
+import org.example.root_be.domain.post_day.domain.DayOfWeek
 import org.example.root_be.domain.role.domain.VolunteerRole
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -35,7 +35,7 @@ class VolunteerPost(
     var workEndDate: LocalDate?,
 
     @OneToMany(mappedBy = "volunteerPost", cascade = [CascadeType.ALL], orphanRemoval = true)
-    var dayOfWeek: MutableList<PostDay> = mutableListOf(),
+    var dayOfWeek: MutableList<DayOfWeek> = mutableListOf(),
 
     @Column(name = "is_regular", nullable = false)
     var isRegular: Boolean,
