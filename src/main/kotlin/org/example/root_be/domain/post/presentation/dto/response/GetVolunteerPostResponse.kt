@@ -7,7 +7,7 @@ import org.example.root_be.domain.post.domain.VolunteerPost
 import org.example.root_be.domain.post_day.domain.PostDay
 import java.time.LocalDate
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 data class GetVolunteerPostResponse(
     val id: Long,
     val title: String,
