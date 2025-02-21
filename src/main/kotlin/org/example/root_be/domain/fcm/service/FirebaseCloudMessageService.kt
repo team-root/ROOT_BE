@@ -6,7 +6,7 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
-import org.example.root_be.domain.fcm.FcmMessage
+import org.example.root_be.domain.fcm.presentation.dto.FcmMessage
 import org.example.root_be.domain.notification.domain.Notification
 import org.example.root_be.domain.notification.presentation.dto.request.generateNotificationRequest
 import org.example.root_be.domain.notification.domain.repository.NotificationRepository

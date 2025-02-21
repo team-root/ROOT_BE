@@ -1,4 +1,4 @@
-package org.example.root_be.domain.fcm
+package org.example.root_be.domain.fcm.presentation.dto
 
 data class FcmMessage(
     val validateOnly: Boolean = false,
