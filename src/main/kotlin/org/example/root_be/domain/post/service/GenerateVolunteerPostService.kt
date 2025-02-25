@@ -36,7 +36,6 @@ class GenerateVolunteerPostService(
                 )
             }
 
-
         val volunteerPost =
             request.run {
                 VolunteerPost(
