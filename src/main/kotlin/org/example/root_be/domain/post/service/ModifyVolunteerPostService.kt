@@ -5,7 +5,7 @@ import org.example.root_be.domain.detail.domain.repository.VolunteerDetailReposi
 import org.example.root_be.domain.detail.facade.DetailFacade
 import org.example.root_be.domain.post.domain.VolunteerPost
 import org.example.root_be.domain.post.domain.repository.VolunteerPostRepository
-import org.example.root_be.domain.post.facade.VolunteerFacade
+import org.example.root_be.domain.post.facade.VolunteerPostFacade
 import org.example.root_be.domain.post.presentation.dto.request.ModifyVolunteerPostRequest
 import org.example.root_be.domain.week_days.domain.WeekDays
 import org.example.root_be.domain.week_days.domain.repository.WeekDaysRepository
@@ -19,7 +19,7 @@ import java.time.LocalDateTime
 @Service
 class ModifyVolunteerPostService(
     private val volunteerPostRepository: VolunteerPostRepository,
-    private val volunteerFacade: VolunteerFacade,
+    private val volunteerPostFacade: VolunteerPostFacade,
     private val roleRepository: RoleRepository,
     private val detailFacade: DetailFacade,
     private val volunteerDetailRepository: VolunteerDetailRepository,
@@ -30,7 +30,7 @@ class ModifyVolunteerPostService(
         postId: Long,
         request: ModifyVolunteerPostRequest
     ) {
-        val post = volunteerFacade.getVolunteerPostById(postId)
+        val post = volunteerPostFacade.getVolunteerPostById(postId)
 
         val applicationDate = request.applicationPeriod.first()
         val workDate = request.workDate?.firstOrNull()

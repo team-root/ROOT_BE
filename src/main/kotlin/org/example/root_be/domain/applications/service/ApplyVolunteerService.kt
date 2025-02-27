@@ -5,19 +5,19 @@ import org.example.root_be.domain.applications.domain.VolunteerApplication
 import org.example.root_be.domain.applications.domain.repository.VolunteerApplicationRepository
 import org.example.root_be.domain.applications.presentation.dto.response.ApplyVolunteerResponse
 import org.example.root_be.domain.user.facade.UserFacade
-import org.example.root_be.domain.post.facade.VolunteerFacade
+import org.example.root_be.domain.post.facade.VolunteerPostFacade
 import org.springframework.stereotype.Service
 
 @Service
 class ApplyVolunteerService(
     private val volunteerApplicationRepository: VolunteerApplicationRepository,
     private val userFacade: UserFacade,
-    private val volunteerFacade: VolunteerFacade
+    private val volunteerPostFacade: VolunteerPostFacade
 ) {
     @Transactional
     fun execute(postId: Long): ApplyVolunteerResponse {
         val user = userFacade.getCurrentUser()
-        val post = volunteerFacade.getVolunteerPostById(postId)
+        val post = volunteerPostFacade.getVolunteerPostById(postId)
 
         val savedApplication = volunteerApplicationRepository.save(
             VolunteerApplication(

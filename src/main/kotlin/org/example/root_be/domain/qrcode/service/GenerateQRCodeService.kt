@@ -1,6 +1,6 @@
 package org.example.root_be.domain.qrcode.service
 
-import org.example.root_be.domain.post.facade.VolunteerFacade
+import org.example.root_be.domain.post.facade.VolunteerPostFacade
 import org.example.root_be.domain.qrcode.domain.QrCode
 import org.example.root_be.domain.qrcode.domain.repository.QrCodeRepository
 import org.example.root_be.domain.qrcode.presentation.dto.request.GenerateQRCodeRequest
@@ -12,11 +12,11 @@ import kotlin.random.Random
 @Service
 class GenerateQRCodeService(
     private val qrCodeRepository: QrCodeRepository,
-    private val volunteerFacade: VolunteerFacade
+    private val volunteerPostFacade: VolunteerPostFacade
 ) {
     @Transactional
     fun generate(request: GenerateQRCodeRequest): GenerateQRCodeResponse {
-        val post = volunteerFacade.getVolunteerPostById(request.postId)
+        val post = volunteerPostFacade.getVolunteerPostById(request.postId)
 
         var qrCode: Int
         do {
