@@ -4,11 +4,13 @@ import org.example.root_be.domain.user.domain.type.Role
 import org.example.root_be.domain.user.facade.UserFacade
 import org.example.root_be.domain.user.presentation.dto.response.MypageResponse
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 @Service
 class MypageService(
     private val userFacade: UserFacade
 ) {
+    @Transactional(readOnly = true)
     fun execute(): MypageResponse {
         return userFacade.getCurrentUser().let { user ->
             when (user.userRole) {
