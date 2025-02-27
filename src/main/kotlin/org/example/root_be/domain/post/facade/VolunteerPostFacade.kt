@@ -13,6 +13,6 @@ class VolunteerPostFacade(
         postId: Long
     ): VolunteerPost {
         return volunteerPostRepository.findById(postId)
-            .orElseThrow() { VolunteerPostNotFoundException }
+            .orElseThrow { throw VolunteerPostNotFoundException }
     }
 }
