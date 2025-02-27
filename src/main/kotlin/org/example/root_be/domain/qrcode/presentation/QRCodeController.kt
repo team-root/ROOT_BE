@@ -1,5 +1,6 @@
 package org.example.root_be.domain.qrcode.presentation
 
+import jakarta.validation.Valid
 import org.example.root_be.domain.qrcode.presentation.dto.request.GenerateQRCodeRequest
 import org.example.root_be.domain.qrcode.presentation.dto.request.ScanQRCodeRequest
 import org.example.root_be.domain.qrcode.presentation.dto.response.GenerateQRCodeResponse
@@ -19,11 +20,13 @@ class QRCodeController(
 ) {
     @PostMapping
     fun generateQRCode(
+        @Valid
         @RequestBody request: GenerateQRCodeRequest
     ): GenerateQRCodeResponse = generateQRCodeService.generate(request)
 
     @PostMapping("/scan")
     fun scanQRCode(
+        @Valid
         @RequestBody request: ScanQRCodeRequest
     ): ScanQRCodeResponse = scanQRCodeService.execute(request)
 }
