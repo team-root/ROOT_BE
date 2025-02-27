@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("/posts")
 @Validated
-class VolunteerController(
+class VolunteerPostController(
     private val generateVolunteerPostService: GenerateVolunteerPostService,
     private val getVolunteerPostsService: GetVolunteerPostListService,
     private val getVolunteerPostService: GetVolunteerPostDetailsService,
