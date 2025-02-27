@@ -7,9 +7,11 @@ import org.example.root_be.domain.applications.presentation.dto.response.GetVolu
 import org.example.root_be.domain.applications.service.ApplyVolunteerService
 import org.example.root_be.domain.applications.service.GetVolunteerApplicationService
 import org.example.root_be.domain.applications.service.ProcessVolunteerApplicationService
+import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
 
 @RestController("/volunteer/applications")
+@Validated
 class ApplicationsController(
     private val applyVolunteerService: ApplyVolunteerService,
     private val getVolunteerApplicationService: GetVolunteerApplicationService,

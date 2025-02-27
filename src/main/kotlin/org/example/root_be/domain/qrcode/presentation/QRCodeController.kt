@@ -7,6 +7,7 @@ import org.example.root_be.domain.qrcode.presentation.dto.response.GenerateQRCod
 import org.example.root_be.domain.qrcode.presentation.dto.response.ScanQRCodeResponse
 import org.example.root_be.domain.qrcode.service.GenerateQRCodeService
 import org.example.root_be.domain.qrcode.service.ScanQRCodeService
+import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/qr")
+@Validated
 class QRCodeController(
     private val generateQRCodeService: GenerateQRCodeService,
     private val scanQRCodeService: ScanQRCodeService

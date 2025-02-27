@@ -6,6 +6,7 @@ import org.example.root_be.domain.post.presentation.dto.request.ModifyVolunteerP
 import org.example.root_be.domain.post.presentation.dto.response.GetVolunteerPostResponse
 import org.example.root_be.domain.post.presentation.dto.response.GetVolunteerPostsResponse
 import org.example.root_be.domain.post.service.*
+import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PatchMapping
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/posts")
+@Validated
 class VolunteerController(
     private val generateVolunteerPostService: GenerateVolunteerPostService,
     private val getVolunteerPostsService: GetVolunteerPostListService,

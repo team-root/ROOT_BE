@@ -1,10 +1,12 @@
 package org.example.root_be.domain.schedule.presentation
 
+import jakarta.validation.Valid
 import org.example.root_be.domain.schedule.presentation.dto.request.GenerateScheduleRequest
 import org.example.root_be.domain.schedule.presentation.dto.request.ModifyScheduleRequest
 import org.example.root_be.domain.schedule.presentation.dto.response.GetScheduleListResponse
 import org.example.root_be.domain.schedule.presentation.dto.response.GetScheduleResponse
 import org.example.root_be.domain.schedule.service.*
+import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PatchMapping
@@ -17,6 +19,7 @@ import java.time.LocalDate
 
 @RestController
 @RequestMapping("/schedules")
+@Validated
 class ScheduleController(
     private val generateScheduleService: GenerateScheduleService,
     private val getScheduleListService: GetScheduleListService,
@@ -26,6 +29,7 @@ class ScheduleController(
 ) {
     @PostMapping
     fun generateSchedule(
+        @Valid
         @RequestBody request: GenerateScheduleRequest
     ) {
         generateScheduleService.execute(request)
@@ -46,6 +50,7 @@ class ScheduleController(
     @PatchMapping("/{date}")
     fun modifySchedule(
         @PathVariable date: LocalDate,
+        @Valid
         @RequestBody request: ModifyScheduleRequest
     ) {
         modifyScheduleService.execute(date, request)
