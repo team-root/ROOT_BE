@@ -13,7 +13,7 @@ data class AddStudentVolunteerRecordRequest(
     val detail: String,
 
     @field:NotNull
-    @Min(value = 1, message = "봉사시간은 1시간 이상이어야 합니다")
+    @field:Min(value = 1, message = "봉사시간은 1시간 이상이어야 합니다")
     val time: Int,
 
     @field:NotBlank(message = "봉사장소는 필수입니다")
