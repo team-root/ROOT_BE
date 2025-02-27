@@ -1,5 +1,6 @@
 package org.example.root_be.domain.notification.presentation
 
+import jakarta.validation.Valid
 import org.example.root_be.domain.fcm.service.FirebaseCloudMessageService
 import org.example.root_be.domain.notification.presentation.dto.request.generateNotificationRequest
 import org.example.root_be.domain.notification.presentation.dto.response.GetNotificationListResponse
@@ -18,6 +19,7 @@ class NotificationController(
 ) {
     @PostMapping
     fun generateNotification(
+        @Valid
         @RequestBody request: generateNotificationRequest
     ) {
         firebaseCloudMessageService.sendAllUsers(request)

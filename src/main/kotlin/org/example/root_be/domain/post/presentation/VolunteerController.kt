@@ -1,5 +1,6 @@
 package org.example.root_be.domain.post.presentation
 
+import jakarta.validation.Valid
 import org.example.root_be.domain.post.presentation.dto.request.GenerateVolunteerPostRequest
 import org.example.root_be.domain.post.presentation.dto.request.ModifyVolunteerPostRequest
 import org.example.root_be.domain.post.presentation.dto.response.GetVolunteerPostResponse
@@ -25,6 +26,7 @@ class VolunteerController(
 ) {
     @PostMapping
     fun generateVolunteerPost(
+        @Valid
         @RequestBody request: GenerateVolunteerPostRequest
     ) {
         generateVolunteerPostService.execute(request)
@@ -36,13 +38,16 @@ class VolunteerController(
     }
 
     @GetMapping("/{postId}")
-    fun getVolunteerPost(@PathVariable postId: Long): GetVolunteerPostResponse {
+    fun getVolunteerPost(
+        @PathVariable postId: Long
+    ): GetVolunteerPostResponse {
         return getVolunteerPostService.execute(postId)
     }
 
     @PatchMapping("/{postId}")
     fun modifyVolunteerPost(
         @PathVariable postId: Long,
+        @Valid
         @RequestBody request: ModifyVolunteerPostRequest
     ) {
         modifyVolunteerPostService.execute(postId, request)

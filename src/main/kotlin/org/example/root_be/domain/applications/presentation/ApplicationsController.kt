@@ -1,5 +1,6 @@
 package org.example.root_be.domain.applications.presentation
 
+import jakarta.validation.Valid
 import org.example.root_be.domain.applications.presentation.dto.request.ProcessVolunteerApplicationRequest
 import org.example.root_be.domain.applications.presentation.dto.response.ApplyVolunteerResponse
 import org.example.root_be.domain.applications.presentation.dto.response.GetVolunteerApplicationResponse
@@ -13,7 +14,7 @@ class ApplicationsController(
     private val applyVolunteerService: ApplyVolunteerService,
     private val getVolunteerApplicationService: GetVolunteerApplicationService,
     private val processVolunteerApplicationService: ProcessVolunteerApplicationService,
-){
+) {
     @PostMapping("/{postId}")
     fun applyVolunteer(
         @PathVariable postId: Long
@@ -26,6 +27,7 @@ class ApplicationsController(
 
     @PostMapping("/status")
     fun processVolunteerApplication(
+        @Valid
         @RequestBody processVolunteerApplicationRequest: ProcessVolunteerApplicationRequest
     ) = processVolunteerApplicationService.execute(processVolunteerApplicationRequest)
 }
