@@ -12,16 +12,17 @@ class StudentVolunteerActivityService(
 ) {
     @Transactional
     fun execute(userId: Long): StudentVolunteerActivityResponse {
-        val volunteerList = volunteerActivityRepository.findAllByUserId(userId)
-            .map { activity ->
-                VolunteerElement(
-                    volunteerTime = activity.volunteerDetail.time,
-                    volunteerAct = activity.volunteerDetail.activityDetails
-                )
-            }
+        val volunteerList =
+            volunteerActivityRepository.findAllByUserId(userId)
+                .map { activity ->
+                    VolunteerElement(
+                        volunteerTime = activity.volunteerDetail.time,
+                        volunteerAct = activity.volunteerDetail.activityDetails,
+                    )
+                }
 
         return StudentVolunteerActivityResponse(
-            volunteerList = volunteerList
+            volunteerList = volunteerList,
         )
     }
 }

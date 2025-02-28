@@ -9,5 +9,9 @@ import org.springframework.stereotype.Repository
 @Repository
 interface VolunteerApplicationRepository : JpaRepository<VolunteerApplication, Long> {
     fun findAllByVolunteerPostId(postId: Long): List<VolunteerApplication>
-    fun findByUserAndVolunteerPost(user: User, volunteerPost: VolunteerPost): VolunteerApplication?
+
+    fun findByUserAndVolunteerPost(
+        user: User,
+        volunteerPost: VolunteerPost,
+    ): VolunteerApplication?
 }

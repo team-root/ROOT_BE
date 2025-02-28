@@ -18,13 +18,13 @@ class VolunteerPostController(
     private val getVolunteerPostsService: GetVolunteerPostListService,
     private val getVolunteerPostService: GetVolunteerPostDetailsService,
     private val modifyVolunteerPostService: ModifyVolunteerPostService,
-    private val deleteVolunteerPostService: DeleteVolunteerPostService
+    private val deleteVolunteerPostService: DeleteVolunteerPostService,
 ) {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     fun generateVolunteerPost(
         @Valid
-        @RequestBody request: GenerateVolunteerPostRequest
+        @RequestBody request: GenerateVolunteerPostRequest,
     ) {
         generateVolunteerPostService.execute(request)
     }
@@ -36,7 +36,7 @@ class VolunteerPostController(
 
     @GetMapping("/{postId}")
     fun getVolunteerPost(
-        @PathVariable postId: Long
+        @PathVariable postId: Long,
     ): GetVolunteerPostResponse {
         return getVolunteerPostService.execute(postId)
     }
@@ -45,14 +45,14 @@ class VolunteerPostController(
     fun modifyVolunteerPost(
         @PathVariable postId: Long,
         @Valid
-        @RequestBody request: ModifyVolunteerPostRequest
+        @RequestBody request: ModifyVolunteerPostRequest,
     ) {
         modifyVolunteerPostService.execute(postId, request)
     }
 
     @DeleteMapping("/{postId}")
     fun deleteVolunteerPost(
-        @PathVariable postId: Long
+        @PathVariable postId: Long,
     ) {
         deleteVolunteerPostService.execute(postId)
     }

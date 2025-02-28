@@ -7,11 +7,9 @@ import org.springframework.stereotype.Component
 
 @Component
 class VolunteerPostFacade(
-    private val volunteerPostRepository: VolunteerPostRepository
+    private val volunteerPostRepository: VolunteerPostRepository,
 ) {
-    fun getVolunteerPostById(
-        postId: Long
-    ): VolunteerPost {
+    fun getVolunteerPostById(postId: Long): VolunteerPost {
         return volunteerPostRepository.findById(postId)
             .orElseThrow { throw VolunteerPostNotFoundException }
     }

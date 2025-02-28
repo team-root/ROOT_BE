@@ -9,12 +9,10 @@ import java.time.LocalDate
 @Service
 class DeleteScheduleService(
     private val scheduleFacade: ScheduleFacade,
-    private val scheduleRepository: ScheduleRepository
+    private val scheduleRepository: ScheduleRepository,
 ) {
     @Transactional
-    fun execute(
-        date: LocalDate
-    ) {
+    fun execute(date: LocalDate) {
         val schedule = scheduleFacade.findScheduleByDate(date)
         val title = schedule.title
         val deleteSchedules = scheduleRepository.findByTitle(title)

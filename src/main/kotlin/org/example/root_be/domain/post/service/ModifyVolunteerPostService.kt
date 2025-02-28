@@ -7,12 +7,12 @@ import org.example.root_be.domain.post.domain.VolunteerPost
 import org.example.root_be.domain.post.domain.repository.VolunteerPostRepository
 import org.example.root_be.domain.post.facade.VolunteerPostFacade
 import org.example.root_be.domain.post.presentation.dto.request.ModifyVolunteerPostRequest
-import org.example.root_be.domain.week_days.domain.WeekDays
-import org.example.root_be.domain.week_days.domain.repository.WeekDaysRepository
-import org.example.root_be.domain.week_days.exception.WeekDaysNotFoundException
 import org.example.root_be.domain.role.domain.VolunteerRole
 import org.example.root_be.domain.role.domain.repository.RoleRepository
 import org.example.root_be.domain.role.exception.VolunteerRoleNotFoundException
+import org.example.root_be.domain.week_days.domain.WeekDays
+import org.example.root_be.domain.week_days.domain.repository.WeekDaysRepository
+import org.example.root_be.domain.week_days.exception.WeekDaysNotFoundException
 import org.springframework.stereotype.Service
 import java.time.LocalDateTime
 
@@ -23,12 +23,12 @@ class ModifyVolunteerPostService(
     private val roleRepository: RoleRepository,
     private val detailFacade: DetailFacade,
     private val volunteerDetailRepository: VolunteerDetailRepository,
-    private val postDayRepository: WeekDaysRepository
+    private val postDayRepository: WeekDaysRepository,
 ) {
     @Transactional
     fun execute(
         postId: Long,
-        request: ModifyVolunteerPostRequest
+        request: ModifyVolunteerPostRequest,
     ) {
         val post = volunteerPostFacade.getVolunteerPostById(postId)
 
@@ -43,7 +43,7 @@ class ModifyVolunteerPostService(
             workStartDate = workDate?.startDate,
             workEndDate = workDate?.endDate,
             personnel = request.personnel,
-            updatedAt = LocalDateTime.now()
+            updatedAt = LocalDateTime.now(),
         )
 
         saveDetail(request, post)
@@ -55,14 +55,14 @@ class ModifyVolunteerPostService(
     @Transactional
     fun saveDetail(
         request: ModifyVolunteerPostRequest,
-        post: VolunteerPost
+        post: VolunteerPost,
     ) {
         val detail = detailFacade.getVolunteerDetailsByPostId(post.id)
         request.run {
             detail.modifyDetail(
                 activityDetails = activityDetails,
                 place = place,
-                time = time
+                time = time,
             )
         }
         volunteerDetailRepository.save(detail)
@@ -71,11 +71,12 @@ class ModifyVolunteerPostService(
     @Transactional
     fun saveRoles(
         request: ModifyVolunteerPostRequest,
-        post: VolunteerPost
+        post: VolunteerPost,
     ) {
-        val requestedRoleIds = request.role
-            .mapNotNull { it.roleId }
-            .toSet()
+        val requestedRoleIds =
+            request.role
+                .mapNotNull { it.roleId }
+                .toSet()
 
         val existingRoles = roleRepository.findAllByVolunteerPost(post)
 
@@ -86,16 +87,18 @@ class ModifyVolunteerPostService(
 
         request.role.forEach { roleRequest ->
             when (val id = roleRequest.roleId) {
-                null -> newRoles.add(
-                    VolunteerRole(
-                        id = 0,
-                        title = roleRequest.title,
-                        volunteerPost = post
+                null ->
+                    newRoles.add(
+                        VolunteerRole(
+                            id = 0,
+                            title = roleRequest.title,
+                            volunteerPost = post,
+                        ),
                     )
-                )
-                else -> existingRoles.find { it.id == id }
-                    ?.apply { title = roleRequest.title }
-                    ?: throw VolunteerRoleNotFoundException
+                else ->
+                    existingRoles.find { it.id == id }
+                        ?.apply { title = roleRequest.title }
+                        ?: throw VolunteerRoleNotFoundException
             }
         }
 
@@ -107,11 +110,12 @@ class ModifyVolunteerPostService(
     @Transactional
     fun saveDayOfWeek(
         request: ModifyVolunteerPostRequest,
-        post: VolunteerPost
+        post: VolunteerPost,
     ) {
-        val modifyDayOfWeekIds = request.dayOfWeek
-            ?.map { it.dayId }?.toSet()
-            ?: setOf()
+        val modifyDayOfWeekIds =
+            request.dayOfWeek
+                ?.map { it.dayId }?.toSet()
+                ?: setOf()
 
         val existingPostDays = postDayRepository.findAllByVolunteerPost(post)
 
@@ -121,7 +125,7 @@ class ModifyVolunteerPostService(
         val addWeekDays = mutableListOf<WeekDays>()
 
         request.dayOfWeek?.forEach { dayOfWeekRequest ->
-            existingPostDays.find {it.id == dayOfWeekRequest.dayId}
+            existingPostDays.find { it.id == dayOfWeekRequest.dayId }
                 ?.apply { dayOfWeek = dayOfWeekRequest.dayOfWeek }
                 ?: throw WeekDaysNotFoundException
         }

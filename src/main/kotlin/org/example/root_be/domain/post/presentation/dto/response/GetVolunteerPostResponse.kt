@@ -17,12 +17,12 @@ data class GetVolunteerPostResponse(
     val place: String,
     val time: String,
     val personnel: String,
-    val role: List<RoleResponse>
+    val role: List<RoleResponse>,
 ) {
     constructor(
         volunteerPost: VolunteerPost,
         volunteerDetail: VolunteerDetail,
-    ): this(
+    ) : this(
         id = volunteerPost.id,
         title = volunteerPost.title,
         activityDetails = volunteerDetail.activityDetails,
@@ -32,17 +32,18 @@ data class GetVolunteerPostResponse(
         place = volunteerDetail.place,
         time = volunteerDetail.time,
         personnel = volunteerPost.personnel,
-        role = volunteerPost.roles.map { RoleResponse(it.id, it.title) }
+        role = volunteerPost.roles.map { RoleResponse(it.id, it.title) },
     )
+
     data class ApplicationPeriodResponse(
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
         val startDate: LocalDate?,
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-        val endDate: LocalDate?
+        val endDate: LocalDate?,
     ) {
-        constructor(volunteerPost: VolunteerPost): this(
+        constructor(volunteerPost: VolunteerPost) : this(
             startDate = volunteerPost.applicationStartDate,
-            endDate = volunteerPost.applicationEndDate
+            endDate = volunteerPost.applicationEndDate,
         )
     }
 
@@ -50,21 +51,21 @@ data class GetVolunteerPostResponse(
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
         val startDate: LocalDate?,
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-        val endDate: LocalDate?
+        val endDate: LocalDate?,
     ) {
-        constructor(volunteerPost: VolunteerPost): this(
+        constructor(volunteerPost: VolunteerPost) : this(
             startDate = volunteerPost.workStartDate,
-            endDate = volunteerPost.workEndDate
+            endDate = volunteerPost.workEndDate,
         )
     }
 
     data class RoleResponse(
         val id: Long,
-        val title: String
+        val title: String,
     )
 
     data class DayOfWeekResponse(
         val id: Long,
-        val dayOfWeek: String
+        val dayOfWeek: String,
     )
 }

@@ -13,22 +13,24 @@ import org.springframework.transaction.annotation.Transactional
 class GrantRoleService(
     private val userFacade: UserFacade,
     private val volunteerPostFacade: VolunteerPostFacade,
-    private val volunteerApplicationRepository: VolunteerApplicationRepository
+    private val volunteerApplicationRepository: VolunteerApplicationRepository,
 ) {
     @Transactional
     fun execute(
         postId: Long,
-        request: GranRoleRequest
+        request: GranRoleRequest,
     ) {
         val post = volunteerPostFacade.getVolunteerPostById(postId)
         val volunteerRoles = post.roles
         val user = userFacade.getUserById(request.userId)
 
-        val volunteerRole = volunteerRoles.find { it.title == request.role }
-            ?: throw VolunteerRoleNotFoundException
+        val volunteerRole =
+            volunteerRoles.find { it.title == request.role }
+                ?: throw VolunteerRoleNotFoundException
 
-        val application = volunteerApplicationRepository.findByUserAndVolunteerPost(user, post)
-            ?: throw ApplicationNotFoundException
+        val application =
+            volunteerApplicationRepository.findByUserAndVolunteerPost(user, post)
+                ?: throw ApplicationNotFoundException
 
         application.volunteerRole = volunteerRole
     }

@@ -12,12 +12,12 @@ import java.time.temporal.ChronoUnit.DAYS
 @Service
 class ModifyScheduleService(
     private val scheduleFacade: ScheduleFacade,
-    private val scheduleRepository: ScheduleRepository
+    private val scheduleRepository: ScheduleRepository,
 ) {
     @Transactional
     fun execute(
         date: LocalDate,
-        request: ModifyScheduleRequest
+        request: ModifyScheduleRequest,
     ) {
         val existingSchedule = scheduleFacade.findScheduleByDate(date)
         val oldTitle = existingSchedule.title
@@ -32,21 +32,22 @@ class ModifyScheduleService(
         val schedulesToDelete = allSchedules.filterNot { it.date in modifyDates }
         scheduleRepository.deleteAll(schedulesToDelete)
 
-        val schedulesToAdd = modifyDates
-            .filterNot { it in existingSchedulesByDate.keys }
-            .map {
-                Schedule(
-                    title = request.title,
-                    date = it
-                )
-            }
+        val schedulesToAdd =
+            modifyDates
+                .filterNot { it in existingSchedulesByDate.keys }
+                .map {
+                    Schedule(
+                        title = request.title,
+                        date = it,
+                    )
+                }
 
         scheduleRepository.saveAll(schedulesToKeep + schedulesToAdd)
     }
 
     private fun modifyDates(
         startDate: LocalDate,
-        endDate: LocalDate
+        endDate: LocalDate,
     ): List<LocalDate> {
         return (0..DAYS.between(startDate, endDate))
             .map { startDate.plusDays(it) }

@@ -19,17 +19,17 @@ class ApplicationsController(
 ) {
     @PostMapping("/{postId}")
     fun applyVolunteer(
-        @PathVariable postId: Long
+        @PathVariable postId: Long,
     ): ApplyVolunteerResponse = applyVolunteerService.execute(postId)
 
     @GetMapping("/{postId}")
     fun getVolunteerApplication(
-        @PathVariable postId: Long
+        @PathVariable postId: Long,
     ): GetVolunteerApplicationResponse = getVolunteerApplicationService.execute(postId)
 
     @PostMapping("/status")
     fun processVolunteerApplication(
         @Valid
-        @RequestBody processVolunteerApplicationRequest: ProcessVolunteerApplicationRequest
+        @RequestBody processVolunteerApplicationRequest: ProcessVolunteerApplicationRequest,
     ) = processVolunteerApplicationService.execute(processVolunteerApplicationRequest)
 }

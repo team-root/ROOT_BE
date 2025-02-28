@@ -2,15 +2,15 @@ package org.example.root_be.domain.fcm.presentation.dto
 
 data class FcmMessage(
     val validateOnly: Boolean = false,
-    val message: Message
+    val message: Message,
 ) {
     data class Message(
         val alarm: alarm,
-        val deviceToken: String
+        val deviceToken: String,
     )
 
     data class alarm(
         val title: String,
-        val body: String
+        val body: String,
     )
 }

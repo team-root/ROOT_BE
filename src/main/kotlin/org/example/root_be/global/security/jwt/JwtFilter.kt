@@ -9,11 +9,10 @@ import org.springframework.web.filter.OncePerRequestFilter
 class JwtFilter(
     private val jwtTokenProvider: JwtTokenProvider,
 ) : OncePerRequestFilter() {
-
     override fun doFilterInternal(
         request: HttpServletRequest,
         response: HttpServletResponse,
-        filterChain: FilterChain
+        filterChain: FilterChain,
     ) {
         val token = jwtTokenProvider.resolveToken(request)
 

@@ -2,7 +2,7 @@ package org.example.root_be.global.err.exception
 
 enum class ErrorCode(
     val message: String,
-    val status: Int
+    val status: Int,
 ) {
     INVALID_ROLE("Invalid role.", 400),
     INVALID_TOKEN("Invalid Token", 401),
