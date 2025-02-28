@@ -17,10 +17,13 @@ import org.springframework.web.cors.CorsConfigurationSource
 @EnableWebSecurity
 class SecurityConfig(
     private val objectMapper: ObjectMapper,
-    private val jwtTokenProvider: JwtTokenProvider
+    private val jwtTokenProvider: JwtTokenProvider,
 ) {
     @Bean
-    fun filterChain(http: HttpSecurity, corsConfigurationSource: CorsConfigurationSource): SecurityFilterChain {
+    fun filterChain(
+        http: HttpSecurity,
+        corsConfigurationSource: CorsConfigurationSource,
+    ): SecurityFilterChain {
         http
             .csrf { it.disable() }
             .cors { it.configurationSource(corsConfigurationSource) }
@@ -29,50 +32,53 @@ class SecurityConfig(
             .authorizeHttpRequests {
                 it
                     .requestMatchers("/auth/**").permitAll()
-
                     // ADMIN, STUDENT 공통 엔드포인트
-                    .requestMatchers(HttpMethod.GET,
+                    .requestMatchers(
+                        HttpMethod.GET,
                         "/users/me",
                         "/posts",
                         "/posts/{postId}",
                         "/schedules",
                         "/schedules/{date}",
-                        "/notifications"
+                        "/notifications",
                     ).hasAnyRole("ADMIN", "STUDENT")
-
                     // STUDENT 전용 엔드포인트
-                    .requestMatchers(HttpMethod.GET,
-                        "/users/me/volunteer"
+                    .requestMatchers(
+                        HttpMethod.GET,
+                        "/users/me/volunteer",
                     ).hasRole("STUDENT")
-                    .requestMatchers(HttpMethod.POST,
+                    .requestMatchers(
+                        HttpMethod.POST,
                         "/volunteer/applications/{postId}",
-                        "/qr/scan"
+                        "/qr/scan",
                     ).hasRole("STUDENT")
-
                     // ADMIN 전용 엔드포인트
-                    .requestMatchers(HttpMethod.GET,
+                    .requestMatchers(
+                        HttpMethod.GET,
                         "/users",
                         "/users/{userId}/volunteer",
-                        "/volunteer/applications/{postId}"
+                        "/volunteer/applications/{postId}",
                     ).hasRole("ADMIN")
-                    .requestMatchers(HttpMethod.POST,
+                    .requestMatchers(
+                        HttpMethod.POST,
                         "/users/volunteer",
                         "/posts",
                         "/volunteer/applications/status",
                         "/volunteer/roles/{postId}",
                         "/schedules",
                         "/qr",
-                        "/notifications"
+                        "/notifications",
                     ).hasRole("ADMIN")
-                    .requestMatchers(HttpMethod.PATCH,
+                    .requestMatchers(
+                        HttpMethod.PATCH,
                         "/posts/{postId}",
-                        "/schedules/{date}"
+                        "/schedules/{date}",
                     ).hasRole("ADMIN")
-                    .requestMatchers(HttpMethod.DELETE,
+                    .requestMatchers(
+                        HttpMethod.DELETE,
                         "/posts/{postId}",
-                        "/schedules/{date}"
+                        "/schedules/{date}",
                     ).hasRole("ADMIN")
-
                     .anyRequest().authenticated()
             }
             .with(FilterConfig(objectMapper, jwtTokenProvider)) {}

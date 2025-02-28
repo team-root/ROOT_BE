@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.*
 @Validated
 class NotificationController(
     private val firebaseCloudMessageService: FirebaseCloudMessageService,
-    private val getNotificationService: GetNotificationListService
+    private val getNotificationService: GetNotificationListService,
 ) {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     fun generateNotification(
         @Valid
-        @RequestBody request: generateNotificationRequest
+        @RequestBody request: generateNotificationRequest,
     ) {
         firebaseCloudMessageService.sendAllUsers(request)
     }

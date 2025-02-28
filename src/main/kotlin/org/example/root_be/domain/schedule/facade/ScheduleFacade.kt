@@ -8,11 +8,9 @@ import java.time.LocalDate
 
 @Component
 class ScheduleFacade(
-    private val scheduleRepository: ScheduleRepository
+    private val scheduleRepository: ScheduleRepository,
 ) {
-    fun findScheduleByDate(
-        date: LocalDate
-    ): Schedule {
+    fun findScheduleByDate(date: LocalDate): Schedule {
         return scheduleRepository.findByDate(date)
             ?: throw ScheduleNotFoundException
     }

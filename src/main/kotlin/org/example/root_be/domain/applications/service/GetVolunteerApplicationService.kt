@@ -12,17 +12,18 @@ class GetVolunteerApplicationService(
 ) {
     @Transactional(readOnly = true)
     fun execute(postId: Long): GetVolunteerApplicationResponse {
-        val applications = volunteerApplicationRepository.findAllByVolunteerPostId(postId)
-            .map { application ->
-                ApplicationElement(
-                    applicationId = application.id,
-                    userId = application.user.id,
-                    grade = application.user.grade,
-                    number = application.user.num,
-                    classNum = application.user.classNum,
-                    name = application.user.name
-                )
-            }
+        val applications =
+            volunteerApplicationRepository.findAllByVolunteerPostId(postId)
+                .map { application ->
+                    ApplicationElement(
+                        applicationId = application.id,
+                        userId = application.user.id,
+                        grade = application.user.grade,
+                        number = application.user.num,
+                        classNum = application.user.classNum,
+                        name = application.user.name,
+                    )
+                }
 
         return GetVolunteerApplicationResponse(applications)
     }

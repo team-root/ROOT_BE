@@ -15,23 +15,21 @@ import java.time.Duration
 class RedisConfig(
     @Value("\${spring.redis.host}")
     private val host: String,
-
     @Value("\${spring.redis.port}")
     private val port: Int,
-
     @Value("\${spring.redis.password}")
-    private val password: String?
+    private val password: String?,
 ) {
-
     @Bean
     fun redisConnectionFactory(): RedisConnectionFactory {
         val redisConfig = RedisStandaloneConfiguration(host, port)
         if (!password.isNullOrBlank()) redisConfig.setPassword(password)
 
-        val clientConfiguration = LettuceClientConfiguration.builder()
-            .commandTimeout(Duration.ofSeconds(1))
-            .shutdownTimeout(Duration.ZERO)
-            .build()
+        val clientConfiguration =
+            LettuceClientConfiguration.builder()
+                .commandTimeout(Duration.ofSeconds(1))
+                .shutdownTimeout(Duration.ZERO)
+                .build()
 
         return LettuceConnectionFactory(redisConfig, clientConfiguration)
     }

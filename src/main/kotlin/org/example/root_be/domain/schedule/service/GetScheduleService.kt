@@ -1,21 +1,19 @@
 package org.example.root_be.domain.schedule.service
 
-import org.springframework.transaction.annotation.Transactional
 import org.example.root_be.domain.schedule.domain.repository.ScheduleRepository
 import org.example.root_be.domain.schedule.facade.ScheduleFacade
 import org.example.root_be.domain.schedule.presentation.dto.response.GetScheduleResponse
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import java.time.LocalDate
 
 @Service
 class GetScheduleService(
     private val scheduleRepository: ScheduleRepository,
-    private val scheduleFacade: ScheduleFacade
+    private val scheduleFacade: ScheduleFacade,
 ) {
     @Transactional(readOnly = true)
-    fun execute(
-        date: LocalDate
-    ): GetScheduleResponse {
+    fun execute(date: LocalDate): GetScheduleResponse {
         val schedule = scheduleFacade.findScheduleByDate(date)
 
         val title = schedule.title
@@ -28,7 +26,7 @@ class GetScheduleService(
             id = schedule.id,
             title = title,
             startDate = startDate,
-            endDate = endDate
+            endDate = endDate,
         )
     }
 }

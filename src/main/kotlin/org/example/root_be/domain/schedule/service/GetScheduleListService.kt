@@ -7,19 +7,20 @@ import org.springframework.transaction.annotation.Transactional
 
 @Service
 class GetScheduleListService(
-    private val scheduleRepository: ScheduleRepository
+    private val scheduleRepository: ScheduleRepository,
 ) {
     @Transactional(readOnly = true)
     fun execute(): GetScheduleListResponse {
         val dates = scheduleRepository.findAll()
 
-        val scheduleResponses =  dates.groupBy { it.title }
-            .map { (title, date) ->
-                val id = date.first().id
-                val startDate = date.minOf { it.date }
-                val endDate = date.maxOf { it.date }
-                GetScheduleListResponse.ScheduleResponse(id, title, startDate, endDate)
-            }
+        val scheduleResponses =
+            dates.groupBy { it.title }
+                .map { (title, date) ->
+                    val id = date.first().id
+                    val startDate = date.minOf { it.date }
+                    val endDate = date.maxOf { it.date }
+                    GetScheduleListResponse.ScheduleResponse(id, title, startDate, endDate)
+                }
 
         return GetScheduleListResponse(scheduleResponses)
     }

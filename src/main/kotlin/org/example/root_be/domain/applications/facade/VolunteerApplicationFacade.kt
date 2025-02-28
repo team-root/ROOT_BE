@@ -7,10 +7,10 @@ import org.springframework.stereotype.Component
 
 @Component
 class VolunteerApplicationFacade(
-    private val volunteerApplicationRepository: VolunteerApplicationRepository
+    private val volunteerApplicationRepository: VolunteerApplicationRepository,
 ) {
     fun getVolunteerApplicationById(applicationId: Long): VolunteerApplication {
         return volunteerApplicationRepository.findById(applicationId)
-            .orElseThrow() { ApplicationNotFoundException }
+            .orElseThrow { ApplicationNotFoundException }
     }
 }

@@ -9,11 +9,9 @@ class WeekDays(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0L,
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "volunteer_post_id")
     val volunteerPost: VolunteerPost,
-
     @Column(name = "day_of_week", nullable = false)
-    var dayOfWeek: String
+    var dayOfWeek: String,
 )

@@ -19,13 +19,13 @@ class ScheduleController(
     private val getScheduleListService: GetScheduleListService,
     private val getScheduleService: GetScheduleService,
     private val modifyScheduleService: ModifyScheduleService,
-    private val deleteScheduleService: DeleteScheduleService
+    private val deleteScheduleService: DeleteScheduleService,
 ) {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     fun generateSchedule(
         @Valid
-        @RequestBody request: GenerateScheduleRequest
+        @RequestBody request: GenerateScheduleRequest,
     ) {
         generateScheduleService.execute(request)
     }
@@ -37,7 +37,7 @@ class ScheduleController(
 
     @GetMapping("/{date}")
     fun getSchedule(
-        @PathVariable date: LocalDate
+        @PathVariable date: LocalDate,
     ): GetScheduleResponse {
         return getScheduleService.execute(date)
     }
@@ -46,14 +46,14 @@ class ScheduleController(
     fun modifySchedule(
         @PathVariable date: LocalDate,
         @Valid
-        @RequestBody request: ModifyScheduleRequest
+        @RequestBody request: ModifyScheduleRequest,
     ) {
         modifyScheduleService.execute(date, request)
     }
 
     @DeleteMapping("/{date}")
     fun deleteSchedule(
-        @PathVariable date: LocalDate
+        @PathVariable date: LocalDate,
     ) {
         deleteScheduleService.execute(date)
     }

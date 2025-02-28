@@ -7,13 +7,13 @@ import org.springframework.transaction.annotation.Transactional
 
 @Service
 class GetVolunteerPostListService(
-    private val volunteerPostRepository: VolunteerPostRepository
+    private val volunteerPostRepository: VolunteerPostRepository,
 ) {
     @Transactional(readOnly = true)
     fun execute(): GetVolunteerPostsResponse {
         return GetVolunteerPostsResponse(
             volunteerPostRepository.findBy()
-                .map { GetVolunteerPostsResponse.VolunteerPostsElement(it) }
+                .map { GetVolunteerPostsResponse.VolunteerPostsElement(it) },
         )
     }
 }

@@ -11,21 +11,21 @@ import org.springframework.web.filter.OncePerRequestFilter
 
 @Component
 class GlobalExceptionFilter(
-    private val objectMapper: ObjectMapper
+    private val objectMapper: ObjectMapper,
 ) : OncePerRequestFilter() {
-
     override fun doFilterInternal(
         request: HttpServletRequest,
         response: HttpServletResponse,
-        filterChain: FilterChain
+        filterChain: FilterChain,
     ) {
         try {
             filterChain.doFilter(request, response)
         } catch (e: Exception) {
-            val errorResponse = when (e) {
-                is CustomException -> ErrorResponse(e.errorCode.message, e.errorCode.status)
-                else -> ErrorResponse(e.message ?: "Internal Server Error", HttpServletResponse.SC_INTERNAL_SERVER_ERROR)
-            }
+            val errorResponse =
+                when (e) {
+                    is CustomException -> ErrorResponse(e.errorCode.message, e.errorCode.status)
+                    else -> ErrorResponse(e.message ?: "Internal Server Error", HttpServletResponse.SC_INTERNAL_SERVER_ERROR)
+                }
 
             response.status = errorResponse.status
             response.contentType = MediaType.APPLICATION_JSON_VALUE

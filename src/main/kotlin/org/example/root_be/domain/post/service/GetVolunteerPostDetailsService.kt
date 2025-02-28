@@ -9,12 +9,10 @@ import org.springframework.transaction.annotation.Transactional
 @Service
 class GetVolunteerPostDetailsService(
     private val volunteerPostFacade: VolunteerPostFacade,
-    private val detailsFacade: DetailFacade
+    private val detailsFacade: DetailFacade,
 ) {
     @Transactional(readOnly = true)
-    fun execute(
-        postId: Long
-    ): GetVolunteerPostResponse {
+    fun execute(postId: Long): GetVolunteerPostResponse {
         val volunteerPost = volunteerPostFacade.getVolunteerPostById(postId)
         val volunteerDetail = detailsFacade.getVolunteerDetailsByPostId(postId)
         return GetVolunteerPostResponse(volunteerPost, volunteerDetail)

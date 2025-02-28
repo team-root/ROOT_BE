@@ -23,7 +23,7 @@ class UserController(
     private val myVolunteerActivityService: MyVolunteerActivityService,
     private val studentQueryService: StudentQueryService,
     private val studentVolunteerActivityService: StudentVolunteerActivityService,
-    private val addStudentVolunteerRecordService: AddStudentVolunteerRecordService
+    private val addStudentVolunteerRecordService: AddStudentVolunteerRecordService,
 ) {
     @GetMapping("/me")
     fun mypage(): MypageResponse = mypageService.execute()
@@ -36,12 +36,12 @@ class UserController(
 
     @GetMapping("/{userId}/volunteer")
     fun studentVolunteerActivity(
-        @PathVariable userId: Long
+        @PathVariable userId: Long,
     ): StudentVolunteerActivityResponse = studentVolunteerActivityService.execute(userId)
 
     @PostMapping("/volunteer")
     fun addStudentVolunteerRecord(
         @Valid
-        @RequestBody request: AddStudentVolunteerRecordRequest
+        @RequestBody request: AddStudentVolunteerRecordRequest,
     ) = addStudentVolunteerRecordService.execute(request)
 }

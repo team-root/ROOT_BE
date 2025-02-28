@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/volunteer/roles")
 @Validated
 class RoleController(
-    private val grantRoleService: GrantRoleService
+    private val grantRoleService: GrantRoleService,
 ) {
     @PostMapping("/{postId}")
     fun grantRoleService(
         @PathVariable postId: Long,
         @Valid
-        @RequestBody request: GranRoleRequest
+        @RequestBody request: GranRoleRequest,
     ) {
         grantRoleService.execute(postId, request)
     }

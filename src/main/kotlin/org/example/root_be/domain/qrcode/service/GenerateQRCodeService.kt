@@ -12,7 +12,7 @@ import kotlin.random.Random
 @Service
 class GenerateQRCodeService(
     private val qrCodeRepository: QrCodeRepository,
-    private val volunteerPostFacade: VolunteerPostFacade
+    private val volunteerPostFacade: VolunteerPostFacade,
 ) {
     @Transactional
     fun generate(request: GenerateQRCodeRequest): GenerateQRCodeResponse {
@@ -26,8 +26,8 @@ class GenerateQRCodeService(
         qrCodeRepository.save(
             QrCode(
                 code = qrCode,
-                volunteerPost = post
-            )
+                volunteerPost = post,
+            ),
         )
 
         return GenerateQRCodeResponse(qrCode)

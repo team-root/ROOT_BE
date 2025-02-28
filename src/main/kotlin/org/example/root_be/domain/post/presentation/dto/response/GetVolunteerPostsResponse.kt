@@ -3,15 +3,15 @@ package org.example.root_be.domain.post.presentation.dto.response
 import org.example.root_be.domain.post.domain.VolunteerPost
 
 data class GetVolunteerPostsResponse(
-    val content: List<VolunteerPostsElement>
+    val content: List<VolunteerPostsElement>,
 ) {
     data class VolunteerPostsElement(
         val id: Long,
-        val title: String
+        val title: String,
     ) {
-        constructor(volunteerPost: VolunteerPost): this(
+        constructor(volunteerPost: VolunteerPost) : this(
             id = volunteerPost.id,
-            title = volunteerPost.title
+            title = volunteerPost.title,
         )
     }
 }

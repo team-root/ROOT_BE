@@ -9,55 +9,46 @@ import java.time.LocalDate
 data class ModifyVolunteerPostRequest(
     @field:NotNull
     val isRegular: Boolean,
-
     @field:NotBlank(message = "제목을 비워둘 수 없습니다.")
     @field:Length(min = 1, max = 30, message = "제목은 최소 1글자, 최대 30글자까지 작성 가능합니다.")
     val title: String,
-
     @field:NotBlank(message = "설명을 비워둘 수 없습니다.")
     @field:Length(min = 1, max = 150, message = "설명은 최소 1글자, 최대 150글자까지 작성 가능합니다.")
     val activityDetails: String,
-
     @field:NotNull
     val applicationPeriod: List<ApplicationPeriodElement>,
-
     val workDate: List<WorkDateElement>?,
-
     val dayOfWeek: MutableList<DayOfWeekElement>?,
-
     @field:NotNull
     val place: String,
-
     @field:NotNull
     val time: String,
-
     @field:NotNull
     val personnel: String,
-
     @field:NotNull
-    val role: List<RoleElement>
+    val role: List<RoleElement>,
 ) {
     data class ApplicationPeriodElement(
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
         val startDate: LocalDate,
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-        val endDate: LocalDate
+        val endDate: LocalDate,
     )
 
     data class WorkDateElement(
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
         val startDate: LocalDate,
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-        val endDate: LocalDate
+        val endDate: LocalDate,
     )
 
     data class RoleElement(
         val roleId: Long?,
-        val title: String
+        val title: String,
     )
 
     data class DayOfWeekElement(
         val dayId: Long,
-        val dayOfWeek: String
+        val dayOfWeek: String,
     )
 }

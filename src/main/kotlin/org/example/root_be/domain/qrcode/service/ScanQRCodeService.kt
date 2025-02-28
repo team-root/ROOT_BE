@@ -8,12 +8,13 @@ import org.springframework.stereotype.Service
 
 @Service
 class ScanQRCodeService(
-    private val qrCodeRepository: QrCodeRepository
+    private val qrCodeRepository: QrCodeRepository,
 ) {
     @Transactional
     fun execute(request: ScanQRCodeRequest): ScanQRCodeResponse {
-        val qrCode = qrCodeRepository.findByCode(request.qrCode)
-            ?: return ScanQRCodeResponse(false)
+        val qrCode =
+            qrCodeRepository.findByCode(request.qrCode)
+                ?: return ScanQRCodeResponse(false)
 
         if (qrCode.isUsed) {
             return ScanQRCodeResponse(false)

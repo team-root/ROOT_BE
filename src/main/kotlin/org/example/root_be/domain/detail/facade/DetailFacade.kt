@@ -7,11 +7,9 @@ import org.springframework.stereotype.Component
 
 @Component
 class DetailFacade(
-    private val volunteerDetailRepository: VolunteerDetailRepository
+    private val volunteerDetailRepository: VolunteerDetailRepository,
 ) {
-    fun getVolunteerDetailsByPostId(
-        postId: Long
-    ): VolunteerDetail {
+    fun getVolunteerDetailsByPostId(postId: Long): VolunteerDetail {
         return volunteerDetailRepository.findById(postId)
             .orElseThrow { VolunteerDetailNotFoundException }
     }

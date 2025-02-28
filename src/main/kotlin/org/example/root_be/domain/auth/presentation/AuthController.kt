@@ -15,19 +15,17 @@ import org.springframework.web.bind.annotation.*
 @Validated
 class AuthController(
     private val refreshService: RefreshService,
-    private val loginService: LoginService
+    private val loginService: LoginService,
 ) {
     @PostMapping("/login")
     fun login(
         @Valid
-        @RequestBody loginRequest: LoginRequest
-    ): LoginResponse =
-        loginService.execute(loginRequest)
+        @RequestBody loginRequest: LoginRequest,
+    ): LoginResponse = loginService.execute(loginRequest)
 
     @PostMapping("/refresh")
     fun refresh(
         @Valid
-        @RequestBody refreshRequest: RefreshRequest)
-    : RefreshResponse =
-        refreshService.execute(refreshRequest)
+        @RequestBody refreshRequest: RefreshRequest,
+    ): RefreshResponse = refreshService.execute(refreshRequest)
 }
