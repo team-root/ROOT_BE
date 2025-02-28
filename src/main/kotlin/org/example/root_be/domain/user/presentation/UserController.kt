@@ -7,6 +7,7 @@ import org.example.root_be.domain.user.presentation.dto.response.MypageResponse
 import org.example.root_be.domain.user.presentation.dto.response.StudentQueryResponse
 import org.example.root_be.domain.user.presentation.dto.response.StudentVolunteerActivityResponse
 import org.example.root_be.domain.user.service.*
+import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/users")
+@Validated
 class UserController(
     private val mypageService: MypageService,
     private val myVolunteerActivityService: MyVolunteerActivityService,
@@ -39,6 +41,7 @@ class UserController(
 
     @PostMapping("/volunteer")
     fun addStudentVolunteerRecord(
-        @Valid @RequestBody request: AddStudentVolunteerRecordRequest
+        @Valid
+        @RequestBody request: AddStudentVolunteerRecordRequest
     ) = addStudentVolunteerRecordService.execute(request)
 }

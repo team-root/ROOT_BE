@@ -2,7 +2,6 @@ package org.example.root_be.domain.post.presentation.dto.request
 
 import com.fasterxml.jackson.annotation.JsonFormat
 import jakarta.validation.constraints.NotBlank
-import org.example.root_be.domain.post_day.domain.PostDay
 import org.hibernate.validator.constraints.Length
 import org.jetbrains.annotations.NotNull
 import java.time.LocalDate

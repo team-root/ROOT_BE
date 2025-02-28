@@ -41,8 +41,8 @@ class User(
     @OneToMany(cascade = [CascadeType.ALL], orphanRemoval = true)
     val teacherRoles: List<TeacherRole> = listOf(),
 
-    @Column(name = "fcm_token")
-    var fcmToken: String?
+    @Column(name = "device_token")
+    var deviceToken: String?
 ) {
     fun addVolunteerTime(time: Int) {
         this.totalVolunteerTime += time

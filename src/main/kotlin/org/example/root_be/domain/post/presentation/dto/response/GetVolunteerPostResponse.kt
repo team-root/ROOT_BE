@@ -4,10 +4,9 @@ import com.fasterxml.jackson.annotation.JsonFormat
 import com.fasterxml.jackson.annotation.JsonInclude
 import org.example.root_be.domain.detail.domain.VolunteerDetail
 import org.example.root_be.domain.post.domain.VolunteerPost
-import org.example.root_be.domain.post_day.domain.PostDay
 import java.time.LocalDate
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 data class GetVolunteerPostResponse(
     val id: Long,
     val title: String,
@@ -29,7 +28,7 @@ data class GetVolunteerPostResponse(
         activityDetails = volunteerDetail.activityDetails,
         applicationPeriod = listOf(ApplicationPeriodResponse(volunteerPost)),
         workDate = listOf(WorkDateResponse(volunteerPost)),
-        dayOfWeek = volunteerPost.dayOfWeek.map { DayOfWeekResponse(it.id, it.dayOfWeek) },
+        dayOfWeek = volunteerPost.weekDays.map { DayOfWeekResponse(it.id, it.dayOfWeek) },
         place = volunteerDetail.place,
         time = volunteerDetail.time,
         personnel = volunteerPost.personnel,

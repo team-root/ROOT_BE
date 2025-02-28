@@ -10,7 +10,7 @@ class VolunteerRole(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0L,
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id")
     val volunteerPost: VolunteerPost,
 

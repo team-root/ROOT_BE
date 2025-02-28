@@ -6,13 +6,13 @@ import org.example.root_be.domain.post.exception.VolunteerPostNotFoundException
 import org.springframework.stereotype.Component
 
 @Component
-class VolunteerFacade(
+class VolunteerPostFacade(
     private val volunteerPostRepository: VolunteerPostRepository
 ) {
     fun getVolunteerPostById(
         postId: Long
     ): VolunteerPost {
         return volunteerPostRepository.findById(postId)
-            .orElseThrow() { VolunteerPostNotFoundException }
+            .orElseThrow { throw VolunteerPostNotFoundException }
     }
 }

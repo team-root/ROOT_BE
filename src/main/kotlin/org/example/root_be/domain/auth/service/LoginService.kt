@@ -53,7 +53,7 @@ class LoginService(
                 classNum = userInfo.classNum,
                 userRole = role,
                 totalVolunteerTime = 0,
-                fcmToken = loginRequest.fcmToken
+                deviceToken = loginRequest.deviceToken
             )
         )
 

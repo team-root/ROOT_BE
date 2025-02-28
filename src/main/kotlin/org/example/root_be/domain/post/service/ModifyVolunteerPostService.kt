@@ -5,11 +5,11 @@ import org.example.root_be.domain.detail.domain.repository.VolunteerDetailReposi
 import org.example.root_be.domain.detail.facade.DetailFacade
 import org.example.root_be.domain.post.domain.VolunteerPost
 import org.example.root_be.domain.post.domain.repository.VolunteerPostRepository
-import org.example.root_be.domain.post.facade.VolunteerFacade
+import org.example.root_be.domain.post.facade.VolunteerPostFacade
 import org.example.root_be.domain.post.presentation.dto.request.ModifyVolunteerPostRequest
-import org.example.root_be.domain.post_day.domain.PostDay
-import org.example.root_be.domain.post_day.domain.repository.PostDayRepository
-import org.example.root_be.domain.post_day.exception.PostDayNotFoundException
+import org.example.root_be.domain.week_days.domain.WeekDays
+import org.example.root_be.domain.week_days.domain.repository.WeekDaysRepository
+import org.example.root_be.domain.week_days.exception.WeekDaysNotFoundException
 import org.example.root_be.domain.role.domain.VolunteerRole
 import org.example.root_be.domain.role.domain.repository.RoleRepository
 import org.example.root_be.domain.role.exception.VolunteerRoleNotFoundException
@@ -19,18 +19,18 @@ import java.time.LocalDateTime
 @Service
 class ModifyVolunteerPostService(
     private val volunteerPostRepository: VolunteerPostRepository,
-    private val volunteerFacade: VolunteerFacade,
+    private val volunteerPostFacade: VolunteerPostFacade,
     private val roleRepository: RoleRepository,
     private val detailFacade: DetailFacade,
     private val volunteerDetailRepository: VolunteerDetailRepository,
-    private val postDayRepository: PostDayRepository
+    private val postDayRepository: WeekDaysRepository
 ) {
     @Transactional
     fun execute(
         postId: Long,
         request: ModifyVolunteerPostRequest
     ) {
-        val post = volunteerFacade.getVolunteerPostById(postId)
+        val post = volunteerPostFacade.getVolunteerPostById(postId)
 
         val applicationDate = request.applicationPeriod.first()
         val workDate = request.workDate?.firstOrNull()
@@ -118,16 +118,16 @@ class ModifyVolunteerPostService(
         val deleteDayOfWeeks = existingPostDays.filter { (it.id !in modifyDayOfWeekIds) }
         postDayRepository.deleteAll(deleteDayOfWeeks)
 
-        val addDayOfWeeks = mutableListOf<PostDay>()
+        val addWeekDays = mutableListOf<WeekDays>()
 
         request.dayOfWeek?.forEach { dayOfWeekRequest ->
             existingPostDays.find {it.id == dayOfWeekRequest.dayId}
                 ?.apply { dayOfWeek = dayOfWeekRequest.dayOfWeek }
-                ?: throw PostDayNotFoundException
+                ?: throw WeekDaysNotFoundException
         }
 
-        if (addDayOfWeeks.isNotEmpty()) {
-            postDayRepository.saveAll(addDayOfWeeks)
+        if (addWeekDays.isNotEmpty()) {
+            postDayRepository.saveAll(addWeekDays)
         }
     }
 }

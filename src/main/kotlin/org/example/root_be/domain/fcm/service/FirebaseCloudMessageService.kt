@@ -6,7 +6,7 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
-import org.example.root_be.domain.fcm.FcmMessage
+import org.example.root_be.domain.fcm.presentation.dto.FcmMessage
 import org.example.root_be.domain.notification.domain.Notification
 import org.example.root_be.domain.notification.presentation.dto.request.generateNotificationRequest
 import org.example.root_be.domain.notification.domain.repository.NotificationRepository
@@ -65,7 +65,7 @@ class FirebaseCloudMessageService(
 
         userRepository.findAll()
             .forEach {
-                it.fcmToken?.let { token ->
+                it.deviceToken?.let { token ->
                     sendDirectTo(token, title, body)
                 }
             }
@@ -77,7 +77,7 @@ class FirebaseCloudMessageService(
         body: String
     ): String {
         val alarm = FcmMessage.alarm(title = title, body = body)
-        val message = FcmMessage.Message(fcmToken = fcmToken, alarm = alarm)
+        val message = FcmMessage.Message(deviceToken = fcmToken, alarm = alarm)
         return objectMapper.writeValueAsString(FcmMessage(message = message))
     }
 

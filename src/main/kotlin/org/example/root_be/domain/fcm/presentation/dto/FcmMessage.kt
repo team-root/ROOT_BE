@@ -1,4 +1,4 @@
-package org.example.root_be.domain.fcm
+package org.example.root_be.domain.fcm.presentation.dto
 
 data class FcmMessage(
     val validateOnly: Boolean = false,
@@ -6,7 +6,7 @@ data class FcmMessage(
 ) {
     data class Message(
         val alarm: alarm,
-        val fcmToken: String
+        val deviceToken: String
     )
 
     data class alarm(
