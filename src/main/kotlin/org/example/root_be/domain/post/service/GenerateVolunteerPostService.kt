@@ -3,11 +3,11 @@ package org.example.root_be.domain.post.service
 import jakarta.transaction.Transactional
 import org.example.root_be.domain.detail.domain.VolunteerDetail
 import org.example.root_be.domain.detail.domain.repository.VolunteerDetailRepository
-import org.example.root_be.domain.role.domain.VolunteerRole
-import org.example.root_be.domain.role.domain.repository.RoleRepository
 import org.example.root_be.domain.post.domain.VolunteerPost
 import org.example.root_be.domain.post.domain.repository.VolunteerPostRepository
 import org.example.root_be.domain.post.presentation.dto.request.GenerateVolunteerPostRequest
+import org.example.root_be.domain.role.domain.VolunteerRole
+import org.example.root_be.domain.role.domain.repository.RoleRepository
 import org.example.root_be.domain.week_days.domain.WeekDays
 import org.example.root_be.domain.week_days.domain.repository.WeekDaysRepository
 import org.springframework.stereotype.Service
@@ -18,12 +18,10 @@ class GenerateVolunteerPostService(
     private val volunteerPostRepository: VolunteerPostRepository,
     private val roleRepository: RoleRepository,
     private val volunteerDetailRepository: VolunteerDetailRepository,
-    private val postDayRepository: WeekDaysRepository
+    private val postDayRepository: WeekDaysRepository,
 ) {
     @Transactional
-    fun execute(
-        request: GenerateVolunteerPostRequest
-    ) {
+    fun execute(request: GenerateVolunteerPostRequest) {
         val applicationDate = request.applicationPeriod.first()
         val workDate = request.workDate?.firstOrNull()
 
@@ -55,7 +53,7 @@ class GenerateVolunteerPostService(
             request.dayOfWeek.map {
                 WeekDays(
                     dayOfWeek = it.dayOfWeek,
-                    volunteerPost = volunteerPost
+                    volunteerPost = volunteerPost,
                 )
             }
 
@@ -68,15 +66,16 @@ class GenerateVolunteerPostService(
     @Transactional
     fun saveRoles(
         request: GenerateVolunteerPostRequest,
-        volunteerPost: VolunteerPost
+        volunteerPost: VolunteerPost,
     ) {
-        val roleList = request.role.map { role ->
-            VolunteerRole(
-                id = role.id,
-                title = role.title,
-                volunteerPost = volunteerPost
-            )
-        }
+        val roleList =
+            request.role.map { role ->
+                VolunteerRole(
+                    id = role.id,
+                    title = role.title,
+                    volunteerPost = volunteerPost,
+                )
+            }
         roleList.map { roleRepository.save(it) }
     }
 }

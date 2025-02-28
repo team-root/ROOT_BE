@@ -10,11 +10,9 @@ class ProcessVolunteerApplicationService(
     private val volunteerApplicationFacade: VolunteerApplicationFacade,
 ) {
     @Transactional
-    fun execute(
-        processVolunteerApplicationRequest: ProcessVolunteerApplicationRequest
-    ) {
+    fun execute(processVolunteerApplicationRequest: ProcessVolunteerApplicationRequest) {
         volunteerApplicationFacade.getVolunteerApplicationById(
-            processVolunteerApplicationRequest.applicationId
+            processVolunteerApplicationRequest.applicationId,
         ).isAccepted = processVolunteerApplicationRequest.isAccepted
     }
 }

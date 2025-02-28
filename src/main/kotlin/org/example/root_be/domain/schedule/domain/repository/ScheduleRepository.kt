@@ -8,5 +8,6 @@ import java.time.LocalDate
 @Repository
 interface ScheduleRepository : JpaRepository<Schedule, Long> {
     fun findByDate(date: LocalDate): Schedule?
+
     fun findByTitle(title: String): List<Schedule>
 }

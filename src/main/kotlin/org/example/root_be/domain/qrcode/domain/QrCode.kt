@@ -9,21 +9,16 @@ class QrCode(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0L,
-
     @Column(unique = true, nullable = false)
     val code: Int,
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id")
     var volunteerPost: VolunteerPost,
-
     @Column(nullable = false)
     val generatedAt: LocalDateTime = LocalDateTime.now(),
-
     @Column(nullable = false)
     var isUsed: Boolean = false,
-
-    var usedAt: LocalDateTime? = null
+    var usedAt: LocalDateTime? = null,
 ) {
     fun markAsUsed() {
         isUsed = true

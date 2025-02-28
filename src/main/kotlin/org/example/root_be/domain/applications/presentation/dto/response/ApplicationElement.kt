@@ -6,5 +6,5 @@ data class ApplicationElement(
     val name: String,
     val grade: Int,
     val classNum: Int,
-    val number: Int
+    val number: Int,
 )

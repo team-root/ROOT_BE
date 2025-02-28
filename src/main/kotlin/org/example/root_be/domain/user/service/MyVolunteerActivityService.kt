@@ -10,22 +10,23 @@ import org.springframework.stereotype.Service
 @Service
 class MyVolunteerActivityService(
     private val volunteerActivityRepository: VolunteerActivityRepository,
-    private val userFacade: UserFacade
+    private val userFacade: UserFacade,
 ) {
     @Transactional
     fun execute(): MyVolunteerActivityResponse {
         val user = userFacade.getCurrentUser()
-        val volunteerList = volunteerActivityRepository.findAllByUserId(user.id)
-            .map { activity ->
-                VolunteerElement(
-                    volunteerTime = activity.volunteerDetail.time,
-                    volunteerAct = activity.volunteerDetail.activityDetails
-                )
-            }
+        val volunteerList =
+            volunteerActivityRepository.findAllByUserId(user.id)
+                .map { activity ->
+                    VolunteerElement(
+                        volunteerTime = activity.volunteerDetail.time,
+                        volunteerAct = activity.volunteerDetail.activityDetails,
+                    )
+                }
 
         return MyVolunteerActivityResponse(
             totalVolunteerTime = user.totalVolunteerTime,
-            volunteerList = volunteerList
+            volunteerList = volunteerList,
         )
     }
 }

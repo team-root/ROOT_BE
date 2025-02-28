@@ -11,15 +11,16 @@ import org.springframework.transaction.annotation.Transactional
 @Service
 class RefreshService(
     private val refreshTokenRepository: RefreshTokenRepository,
-    private val jwtTokenProvider: JwtTokenProvider
+    private val jwtTokenProvider: JwtTokenProvider,
 ) {
     @Transactional
     fun execute(refreshRequest: RefreshRequest): RefreshResponse {
-        val refreshToken = refreshTokenRepository.findByToken(refreshRequest.refreshToken)
-            ?: throw RefreshTokenNotFoundException()
+        val refreshToken =
+            refreshTokenRepository.findByToken(refreshRequest.refreshToken)
+                ?: throw RefreshTokenNotFoundException()
 
         return RefreshResponse(
-            accessToken = jwtTokenProvider.generateAccessToken(refreshToken.userId)
+            accessToken = jwtTokenProvider.generateAccessToken(refreshToken.userId),
         )
     }
 }

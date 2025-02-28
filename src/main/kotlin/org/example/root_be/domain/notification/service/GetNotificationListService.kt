@@ -7,13 +7,13 @@ import org.springframework.transaction.annotation.Transactional
 
 @Service
 class GetNotificationListService(
-    private val notificationRepository: NotificationRepository
+    private val notificationRepository: NotificationRepository,
 ) {
     @Transactional(readOnly = true)
-    fun execute():GetNotificationListResponse {
+    fun execute(): GetNotificationListResponse {
         return GetNotificationListResponse(
             notificationRepository.findBy()
-                .map { GetNotificationListResponse.NotificationResponse(it) }
+                .map { GetNotificationListResponse.NotificationResponse(it) },
         )
     }
 }

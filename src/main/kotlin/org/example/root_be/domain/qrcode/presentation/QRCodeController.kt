@@ -16,18 +16,18 @@ import org.springframework.web.bind.annotation.*
 @Validated
 class QRCodeController(
     private val generateQRCodeService: GenerateQRCodeService,
-    private val scanQRCodeService: ScanQRCodeService
+    private val scanQRCodeService: ScanQRCodeService,
 ) {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     fun generateQRCode(
         @Valid
-        @RequestBody request: GenerateQRCodeRequest
+        @RequestBody request: GenerateQRCodeRequest,
     ): GenerateQRCodeResponse = generateQRCodeService.generate(request)
 
     @PostMapping("/scan")
     fun scanQRCode(
         @Valid
-        @RequestBody request: ScanQRCodeRequest
+        @RequestBody request: ScanQRCodeRequest,
     ): ScanQRCodeResponse = scanQRCodeService.execute(request)
 }

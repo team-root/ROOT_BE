@@ -7,5 +7,6 @@ import org.springframework.stereotype.Repository
 @Repository
 interface QrCodeRepository : JpaRepository<QrCode, Long> {
     fun existsByCode(code: Int): Boolean
+
     fun findByCode(code: Int): QrCode?
 }
