@@ -1,9 +1,20 @@
 plugins {
-    kotlin("jvm") version "1.9.25"
-    kotlin("plugin.spring") version "1.9.25"
-    id("org.springframework.boot") version "3.4.1"
-    id("io.spring.dependency-management") version "1.1.7"
-    kotlin("plugin.jpa") version "1.9.25"
+
+    // Java
+    kotlin("jvm") version PluginVersions.JVM_VERSION
+
+    // Spring
+    kotlin("plugin.spring") version PluginVersions.SPRING_PLUGIN_VERSION
+    id("org.springframework.boot") version PluginVersions.SPRING_BOOT_VERSION
+
+    // Gradle
+    id("io.spring.dependency-management") version PluginVersions.DEPENDENCY_MANAGER_VERSION
+
+    // jpa
+    kotlin("plugin.jpa") version PluginVersions.JPA_PLUGIN_VERSION
+
+    // lint
+    id("org.jlleitschuh.gradle.ktlint") version PluginVersions.KLINT_VERSION
 }
 
 group = "org.example"
@@ -20,30 +31,52 @@ repositories {
 }
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    implementation("org.springframework.boot:spring-boot-starter-data-redis")
-    implementation("org.springframework.boot:spring-boot-starter-security")
-    implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.springframework.boot:spring-boot-starter-validation")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-    implementation("org.jetbrains.kotlin:kotlin-reflect")
-    implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
-    implementation("io.github.openfeign:feign-httpclient:13.5")
-    implementation("io.jsonwebtoken:jjwt-api:0.11.5")
-    implementation("com.google.firebase:firebase-admin:6.8.1")
-    implementation("com.squareup.okhttp3:okhttp:4.9.1")
-    runtimeOnly("io.jsonwebtoken:jjwt-impl:0.11.5")
-    runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.11.5")
+
+    // jpa
+    implementation(DependencyNames.SPRING_DATA_JPA)
+
+    // redis
+    implementation(DependencyNames.REDIS)
+
+    // Security
+    implementation(DependencyNames.SECURITY)
+
+    // Spring Web
+    implementation(DependencyNames.SPRING_WEB)
+    implementation(DependencyNames.SPRING_VALIDATION)
+
+    // Kotlin
+    implementation(DependencyNames.JACKSON)
+    implementation(DependencyNames.KOTLIN_REFLECT)
+
+    // feign
+    implementation(DependencyNames.OPEN_FEIGN)
+    implementation(DependencyNames.FEIGN_HTTP)
+
+    // jwt
+    implementation(DependencyNames.JWT_API)
+    runtimeOnly(DependencyNames.JWT_IMPL)
+    runtimeOnly(DependencyNames.JWT_JACKSON)
+
+    // firebase
+    implementation(DependencyNames.FIREBASE)
+
+    // okhttp3
+    implementation(DependencyNames.OKHTTP3)
+
+    // mysql
     runtimeOnly("com.mysql:mysql-connector-j")
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
-    testImplementation("org.springframework.security:spring-security-test")
+
+    // test
+    testImplementation(DependencyNames.SPRING_TEST)
+    testImplementation(DependencyNames.JUNIT5)
+    testImplementation(DependencyNames.SPRING_SECURITY_TEST)
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
 dependencyManagement {
     imports {
-        mavenBom("org.springframework.cloud:spring-cloud-dependencies:2024.0.0")
+        mavenBom("org.springframework.cloud:spring-cloud-dependencies:${DependencyVersion.SPRING_CLOUD_VERSION}")
     }
 }
 
