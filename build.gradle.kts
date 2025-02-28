@@ -21,21 +21,42 @@ repositories {
 }
 
 dependencies {
+    // jpa
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+
+    // redis
     implementation("org.springframework.boot:spring-boot-starter-data-redis")
+
+    // Security
     implementation("org.springframework.boot:spring-boot-starter-security")
+
+    // Spring Web
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-validation")
+
+    // Kotlin
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
+
+    // feign
     implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
     implementation("io.github.openfeign:feign-httpclient:13.5")
-    implementation("io.jsonwebtoken:jjwt-api:0.11.5")
-    implementation("com.google.firebase:firebase-admin:6.8.1")
-    implementation("com.squareup.okhttp3:okhttp:4.9.1")
-    runtimeOnly("io.jsonwebtoken:jjwt-impl:0.11.5")
-    runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.11.5")
+
+    // jwt
+    implementation("io.jsonwebtoken:jjwt-api:${DependencyVersion.JWT_VERSION}")
+    runtimeOnly("io.jsonwebtoken:jjwt-impl:${DependencyVersion.JWT_VERSION}")
+    runtimeOnly("io.jsonwebtoken:jjwt-jackson:${DependencyVersion.JWT_VERSION}")
+
+    // firebase
+    implementation("com.google.firebase:firebase-admin:${DependencyVersion.FIREBASE_VERSION}")
+
+    // okhttp3
+    implementation("com.squareup.okhttp3:okhttp:${DependencyVersion.OKHTTP3_VERSION}")
+
+    // mysql
     runtimeOnly("com.mysql:mysql-connector-j")
+
+    // test
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
     testImplementation("org.springframework.security:spring-security-test")
@@ -44,7 +65,7 @@ dependencies {
 
 dependencyManagement {
     imports {
-        mavenBom("org.springframework.cloud:spring-cloud-dependencies:2024.0.0")
+        mavenBom("org.springframework.cloud:spring-cloud-dependencies:${DependencyVersion.SPRING_CLOUD_VERSION}")
     }
 }
 
