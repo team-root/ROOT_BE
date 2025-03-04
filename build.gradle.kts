@@ -65,13 +65,13 @@ dependencies {
     implementation(DependencyNames.OKHTTP3)
 
     // mysql
-    runtimeOnly("com.mysql:mysql-connector-j")
+    runtimeOnly(DependencyNames.MYSQL)
 
     // test
     testImplementation(DependencyNames.SPRING_TEST)
     testImplementation(DependencyNames.JUNIT5)
     testImplementation(DependencyNames.SPRING_SECURITY_TEST)
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    testRuntimeOnly(DependencyNames.JUNIT_LAUNCHER)
 }
 
 dependencyManagement {
