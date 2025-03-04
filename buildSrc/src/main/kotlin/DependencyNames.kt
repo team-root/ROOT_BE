@@ -19,6 +19,9 @@ object DependencyNames {
     // redis
     const val REDIS = "$STARTER-data-redis"
 
+    // mysql
+    const val MYSQL = "com.mysql:mysql-connector-j"
+
     // security
     const val SECURITY = "$STARTER-security"
 
@@ -41,4 +44,6 @@ object DependencyNames {
     const val SPRING_TEST = "$STARTER-test"
     const val JUNIT5 = "org.jetbrains.kotlin:kotlin-test-junit5"
     const val SPRING_SECURITY_TEST = "org.jetbrains.kotlin:kotlin-test-junit5"
+
+    const val JUNIT_LAUNCHER = "org.junit.platform:junit-platform-launcher"
 }
