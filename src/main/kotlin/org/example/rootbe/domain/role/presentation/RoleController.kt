@@ -2,8 +2,11 @@ package org.example.rootbe.domain.role.presentation
 
 import jakarta.validation.Valid
 import org.example.rootbe.domain.role.presentation.dto.request.GranRoleRequest
+import org.example.rootbe.domain.role.presentation.response.GetAcceptedStudentsResponse
+import org.example.rootbe.domain.role.service.GetAcceptedStudentsService
 import org.example.rootbe.domain.role.service.GrantRoleService
 import org.springframework.validation.annotation.Validated
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController
 @Validated
 class RoleController(
     private val grantRoleService: GrantRoleService,
+    private val getAcceptedStudentsService: GetAcceptedStudentsService
 ) {
     @PostMapping("/{postId}")
     fun grantRoleService(
@@ -23,5 +27,12 @@ class RoleController(
         @RequestBody request: GranRoleRequest,
     ) {
         grantRoleService.execute(postId, request)
+    }
+
+    @GetMapping("/{postId}")
+    fun getAcceptedStudents(
+        @PathVariable postId: Long
+    ): GetAcceptedStudentsResponse {
+        return getAcceptedStudentsService.execute(postId)
     }
 }
