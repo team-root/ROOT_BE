@@ -1,4 +1,4 @@
-package org.example.rootbe.domain.applications.presentation.dto.response
+package org.example.rootbe.domain.role.presentation.response
 
 data class GetAcceptedStudentsResponse(
     val students: List<AcceptedStudentsResponse>,
