@@ -1,7 +1,7 @@
-package org.example.rootbe.domain.applications.service
+package org.example.rootbe.domain.role.service
 
 import org.example.rootbe.domain.applications.domain.repository.VolunteerApplicationRepository
-import org.example.rootbe.domain.applications.presentation.dto.response.GetAcceptedStudentsResponse
+import org.example.rootbe.domain.role.presentation.response.GetAcceptedStudentsResponse
 import org.example.rootbe.domain.post.facade.VolunteerPostFacade
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
