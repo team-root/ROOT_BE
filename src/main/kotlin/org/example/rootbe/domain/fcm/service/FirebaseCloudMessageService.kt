@@ -36,11 +36,11 @@ class FirebaseCloudMessageService(
     }
 
     private fun sendDirectTo(
-        fcmToken: String,
+        deviceToken: String,
         title: String,
         body: String,
     ) {
-        val message = makeMessage(fcmToken, title, body)
+        val message = makeMessage(deviceToken, title, body)
 
         val client = OkHttpClient()
         val requestBody =
@@ -73,12 +73,12 @@ class FirebaseCloudMessageService(
     }
 
     private fun makeMessage(
-        fcmToken: String,
+        deviceToken: String,
         title: String,
         body: String,
     ): String {
         val alarm = FcmMessage.Alarm(title = title, body = body)
-        val message = FcmMessage.Message(deviceToken = fcmToken, alarm = alarm)
+        val message = FcmMessage.Message(deviceToken = deviceToken, alarm = alarm)
         return objectMapper.writeValueAsString(FcmMessage(message = message))
     }
 
