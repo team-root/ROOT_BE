@@ -14,4 +14,6 @@ interface VolunteerApplicationRepository : JpaRepository<VolunteerApplication, L
         user: User,
         volunteerPost: VolunteerPost,
     ): VolunteerApplication?
+
+    fun findAllByVolunteerPost(post: VolunteerPost): List<VolunteerApplication>
 }
