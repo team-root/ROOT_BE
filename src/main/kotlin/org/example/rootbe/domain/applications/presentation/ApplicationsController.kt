@@ -3,8 +3,10 @@ package org.example.rootbe.domain.applications.presentation
 import jakarta.validation.Valid
 import org.example.rootbe.domain.applications.presentation.dto.request.ProcessVolunteerApplicationRequest
 import org.example.rootbe.domain.applications.presentation.dto.response.ApplyVolunteerResponse
+import org.example.rootbe.domain.applications.presentation.dto.response.GetAcceptedStudentsResponse
 import org.example.rootbe.domain.applications.presentation.dto.response.GetVolunteerApplicationResponse
 import org.example.rootbe.domain.applications.service.ApplyVolunteerService
+import org.example.rootbe.domain.applications.service.GetAcceptedStudentsService
 import org.example.rootbe.domain.applications.service.GetVolunteerApplicationService
 import org.example.rootbe.domain.applications.service.ProcessVolunteerApplicationService
 import org.springframework.validation.annotation.Validated
@@ -20,6 +22,7 @@ class ApplicationsController(
     private val applyVolunteerService: ApplyVolunteerService,
     private val getVolunteerApplicationService: GetVolunteerApplicationService,
     private val processVolunteerApplicationService: ProcessVolunteerApplicationService,
+    private val getAcceptedStudentsService: GetAcceptedStudentsService
 ) {
     @PostMapping("/{postId}")
     fun applyVolunteer(
@@ -36,4 +39,9 @@ class ApplicationsController(
         @Valid
         @RequestBody processVolunteerApplicationRequest: ProcessVolunteerApplicationRequest,
     ) = processVolunteerApplicationService.execute(processVolunteerApplicationRequest)
+
+    @GetMapping("/{postId}")
+    fun getAcceptedStudents(
+        @PathVariable postId: Long
+    ): GetAcceptedStudentsResponse = getAcceptedStudentsService.execute(postId)
 }
