@@ -3,7 +3,7 @@ package org.example.rootbe.domain.role.presentation
 import jakarta.validation.Valid
 import org.example.rootbe.domain.role.presentation.dto.request.GranRoleRequest
 import org.example.rootbe.domain.role.presentation.response.GetAcceptedStudentsResponse
-import org.example.rootbe.domain.role.service.GetAcceptedStudentsService
+import org.example.rootbe.domain.role.service.GetAcceptedStudentListService
 import org.example.rootbe.domain.role.service.GrantRoleService
 import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.GetMapping
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController
 @Validated
 class RoleController(
     private val grantRoleService: GrantRoleService,
-    private val getAcceptedStudentsService: GetAcceptedStudentsService
+    private val getAcceptedStudentListService: GetAcceptedStudentListService
 ) {
     @PostMapping("/{postId}")
     fun grantRoleService(
@@ -33,6 +33,6 @@ class RoleController(
     fun getAcceptedStudents(
         @PathVariable postId: Long
     ): GetAcceptedStudentsResponse {
-        return getAcceptedStudentsService.execute(postId)
+        return getAcceptedStudentListService.execute(postId)
     }
 }
