@@ -64,6 +64,9 @@ dependencies {
     // okhttp3
     implementation(DependencyNames.OKHTTP3)
 
+    // hwp
+    implementation(DependencyNames.HWP)
+
     // mysql
     runtimeOnly(DependencyNames.MYSQL)
 

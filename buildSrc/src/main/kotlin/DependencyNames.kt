@@ -40,6 +40,9 @@ object DependencyNames {
     // okhttp3
     const val OKHTTP3 = "com.squareup.okhttp3:okhttp:${DependencyVersion.OKHTTP3_VERSION}"
 
+    // hwpLib
+    const val HWP = "kr.dogfoot:hwplib:${DependencyVersion.HWP_LIB_VERSION}"
+
     // test
     const val SPRING_TEST = "$STARTER-test"
     const val JUNIT5 = "org.jetbrains.kotlin:kotlin-test-junit5"
