@@ -5,4 +5,5 @@ object DependencyVersion {
     const val SPRING_CLOUD_VERSION = "2024.0.0"
     const val HWP_LIB_VERSION = "1.1.5"
     const val POI_VERSION = "5.2.3"
+    const val COMMONS_IO = "2.11.0"
 }
