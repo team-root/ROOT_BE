@@ -43,6 +43,9 @@ object DependencyNames {
     // hwpLib
     const val HWP = "kr.dogfoot:hwplib:${DependencyVersion.HWP_LIB_VERSION}"
 
+    // poi
+    const val POI_OOXML = "org.apache.poi:poi-ooxml:${DependencyVersion.POI_VERSION}"
+
     // test
     const val SPRING_TEST = "$STARTER-test"
     const val JUNIT5 = "org.jetbrains.kotlin:kotlin-test-junit5"
