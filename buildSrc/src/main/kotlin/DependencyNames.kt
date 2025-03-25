@@ -46,6 +46,9 @@ object DependencyNames {
     // poi
     const val POI_OOXML = "org.apache.poi:poi-ooxml:${DependencyVersion.POI_VERSION}"
 
+    // commons io
+    const val COMMONS_IO = "commons-io:commons-io:${DependencyVersion.COMMONS_IO}"
+
     // test
     const val SPRING_TEST = "$STARTER-test"
     const val JUNIT5 = "org.jetbrains.kotlin:kotlin-test-junit5"
