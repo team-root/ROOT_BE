@@ -4,4 +4,5 @@ object DependencyVersion {
     const val OKHTTP3_VERSION = "4.9.1"
     const val SPRING_CLOUD_VERSION = "2024.0.0"
     const val HWP_LIB_VERSION = "1.1.5"
+    const val POI_VERSION = "5.2.3"
 }
